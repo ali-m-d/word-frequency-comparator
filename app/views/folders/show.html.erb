@@ -1,9 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @folder.name %>
-</p>
+<div class="Folder">
+  <%= content_tag :span, "#{@folder.name}", class: "folder-name" %>
+  <%= link_to 'Edit', edit_folder_path(@folder) %>
+</div>
+
+<div id="documents">
+  <%= render @folder.documents %>
+</div>
+
+<div>
+  <%= form_for([@folder, @folder.documents.new]) do |f| %>
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Add new document" %>
+    </div>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_folder_path(@folder) %> |
 <%= link_to 'Back', folders_path %>

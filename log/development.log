@@ -2091,3 +2091,810 @@ Migrating to AddGuestToUsers (20200710142446)
   [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
   [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (10.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddNameToFolders (20200710111756)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.9ms)[0m  [1m[35mALTER TABLE "folders" ADD "name" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE "word_frequency_comparator_development" ENCODING = 'unicode' TEMPLATE = "template0"[0m
+  [1m[35m (308.5ms)[0m  [1m[35mCREATE DATABASE "word_frequency_comparator_test" ENCODING = 'unicode' TEMPLATE = "template0"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "folders" CASCADE[0m
+  [1m[35m (8.9ms)[0m  [1m[35mCREATE TABLE "folders" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL)[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE  INDEX  "index_folders_on_user_id" ON "folders"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "guest" boolean)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "folders" ADD CONSTRAINT "fk_rails_2a04d378cf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200710142446)[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200710111756),
+(20200710113517),
+(20200710113821),
+(20200710125126),
+(20200710141809);
+
+[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-07-10 16:17:24.991307"], ["updated_at", "2020-07-10 16:17:24.991307"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "5ae6c42e61e35ff642af012bdd2da0a0f258c53d"], ["created_at", "2020-07-10 16:17:25.009897"], ["updated_at", "2020-07-10 16:17:25.009897"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "folders" CASCADE[0m
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "folders" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "user_id" bigint NOT NULL)[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE  INDEX  "index_folders_on_user_id" ON "folders"  ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "username" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, "guest" boolean)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mALTER TABLE "folders" ADD CONSTRAINT "fk_rails_2a04d378cf"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200710142446)[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200710111756),
+(20200710113517),
+(20200710113821),
+(20200710125126),
+(20200710141809);
+
+[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-07-10 16:17:25.096427"], ["updated_at", "2020-07-10 16:17:25.096427"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.2ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-07-10 16:17:25.102311"], ["key", "environment"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "5ae6c42e61e35ff642af012bdd2da0a0f258c53d"], ["created_at", "2020-07-10 16:17:25.107467"], ["updated_at", "2020-07-10 16:17:25.107467"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateDocuments (20200710161628)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "documents" ("id" bigserial primary key, "title" character varying, "url" character varying, "text" text, "folder_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_404da7ca3d"
+FOREIGN KEY ("folder_id")
+  REFERENCES "folders" ("id")
+)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE  INDEX  "index_documents_on_folder_id" ON "documents"  ("folder_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200710161628"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 92.13.244.1 at 2020-07-10 16:18:59 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by FoldersController#index as HTML
+Redirected to https://f274f9abe17248979e5dabdf73693f37.vfs.cloud9.eu-west-2.amazonaws.com/login
+Filter chain halted as :ensure_login rendered or redirected
+Completed 302 Found in 4ms (ActiveRecord: 0.0ms | Allocations: 367)
+
+
+Started GET "/login" for 92.13.244.1 at 2020-07-10 16:18:59 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 1.1ms | Allocations: 595)
+Completed 500 Internal Server Error in 27ms (ActiveRecord: 0.0ms | Allocations: 16887)
+
+
+  
+ActionView::Template::Error (link_tree argument must be a directory):
+  
+app/assets/config/manifest.js:1
+Started GET "/favicon.ico" for 92.13.244.1 at 2020-07-10 16:19:02 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.3) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.3) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.0.3) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.3) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/method_override.rb:24:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.2) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+webpacker (4.2.2) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.3.2) lib/rails/engine.rb:527:in `call'
+puma (4.3.5) lib/puma/configuration.rb:228:in `call'
+puma (4.3.5) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.5) lib/puma/server.rb:472:in `process_client'
+puma (4.3.5) lib/puma/server.rb:328:in `block in run'
+puma (4.3.5) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/login" for 92.13.244.1 at 2020-07-10 16:19:27 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.8ms | Allocations: 273)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 24ms (Views: 24.0ms | ActiveRecord: 0.0ms | Allocations: 9393)
+
+
+Started POST "/sessions" for 92.13.244.1 at 2020-07-10 16:19:38 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"LtkcAHoKK+Ec/dJiVub3T+fTvC3u9NORsmlRDTHfws6If0qea9Q/x7qUT4/XNnWKIj+vtfi8Dy2F3ZBNcnOR1w==", "user"=>{"username"=>"Ali", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Ali"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:7:in `create'
+Redirected to https://f274f9abe17248979e5dabdf73693f37.vfs.cloud9.eu-west-2.amazonaws.com/login
+Completed 302 Found in 9ms (ActiveRecord: 1.8ms | Allocations: 3568)
+
+
+Started GET "/login" for 92.13.244.1 at 2020-07-10 16:19:38 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 344)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.0ms | Allocations: 3759)
+
+
+Started POST "/sessions" for 92.13.244.1 at 2020-07-10 16:19:45 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"GB/h3yxFm9IdV1J4xM3BOUpcOydwATtCLoNIlyuvR/K+ubdBPZuP9Ls+z5VFHUP8j7Aov2ZJ5/4ZN4nXaAMU6w==", "user"=>{"username"=>"Ali", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Ali"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:7:in `create'
+Redirected to https://f274f9abe17248979e5dabdf73693f37.vfs.cloud9.eu-west-2.amazonaws.com/login
+Completed 302 Found in 4ms (ActiveRecord: 0.5ms | Allocations: 932)
+
+
+Started GET "/login" for 92.13.244.1 at 2020-07-10 16:19:46 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.6ms | Allocations: 348)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.0ms | Allocations: 3766)
+
+
+Started GET "/users/new" for 92.13.244.1 at 2020-07-10 16:19:51 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 1.1ms | Allocations: 627)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 13ms (Views: 6.3ms | ActiveRecord: 2.3ms | Allocations: 8446)
+
+
+Started POST "/users" for 92.13.244.1 at 2020-07-10 16:19:56 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"t8maJ/rz+1Q8HDrJCxvSF2ZBnZpxvgZN9QeVcj7m4IkRb8y56y3vcpp1pySKy1DSo62OAmf22vHCs1QyfUqzkA==", "user"=>{"username"=>"Ali", "password"=>"[FILTERED]"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:31:in `block in create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["username", "Ali"], ["password_digest", "$2a$12$OMM75OVqJakihX0TgndTo.567sNTcBb9CM4SrMx0caH/50.oUPaCu"], ["created_at", "2020-07-10 16:19:56.789252"], ["updated_at", "2020-07-10 16:19:56.789252"]]
+  ↳ app/controllers/users_controller.rb:31:in `block in create'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:31:in `block in create'
+Redirected to https://f274f9abe17248979e5dabdf73693f37.vfs.cloud9.eu-west-2.amazonaws.com/
+Completed 302 Found in 281ms (ActiveRecord: 1.5ms | Allocations: 3157)
+
+
+Started GET "/" for 92.13.244.1 at 2020-07-10 16:19:56 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+Redirected to https://f274f9abe17248979e5dabdf73693f37.vfs.cloud9.eu-west-2.amazonaws.com/login
+Filter chain halted as :ensure_login rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 328)
+
+
+Started GET "/login" for 92.13.244.1 at 2020-07-10 16:19:57 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 352)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.0ms | Allocations: 3772)
+
+
+Started POST "/sessions" for 92.13.244.1 at 2020-07-10 16:20:09 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"MsEc8bT0yb8JkWekNquh+7oZs/XhbHK3ga8o2hjwlE6UZ0pvpSrdma/4+km3eyM+f/Wgbfckrgu2G+maW1zHVw==", "user"=>{"username"=>"Ali", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Ali"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:7:in `create'
+Redirected to https://f274f9abe17248979e5dabdf73693f37.vfs.cloud9.eu-west-2.amazonaws.com/
+Completed 302 Found in 279ms (ActiveRecord: 0.2ms | Allocations: 991)
+
+
+Started GET "/" for 92.13.244.1 at 2020-07-10 16:20:10 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 3)
+  Rendered folders/index.html.erb within layouts/application (Duration: 4.8ms | Allocations: 990)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 38ms (Views: 11.7ms | ActiveRecord: 2.1ms | Allocations: 12781)
+
+
+Started GET "/folders/new" for 92.13.244.1 at 2020-07-10 16:20:16 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#new as JS
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/new.js.erb
+  Rendered folders/_form.html.erb (Duration: 8.6ms | Allocations: 4521)
+  Rendered folders/new.js.erb (Duration: 9.5ms | Allocations: 4927)
+Completed 200 OK in 19ms (Views: 11.1ms | ActiveRecord: 1.6ms | Allocations: 10256)
+
+
+Started POST "/folders" for 92.13.244.1 at 2020-07-10 16:20:18 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#create as JS
+  Parameters: {"authenticity_token"=>"Hb15cy7BoxKJgh/WzKr42t/xJi5AlA34ltoLnrmFAjrvDqX3PrcEchM5Kbc8pA94QfALFLzKBXa6h+gpwap/FA==", "folder"=>{"name"=>"Test"}, "commit"=>"Create Folder"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  [1m[36mFolder Create (0.6ms)[0m  [1m[32mINSERT INTO "folders" ("name", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test"], ["created_at", "2020-07-10 16:20:18.466682"], ["updated_at", "2020-07-10 16:20:18.466682"], ["user_id", 1]]
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  Rendering folders/create.js.erb
+  Rendered folders/_folder.html.erb (Duration: 0.5ms | Allocations: 314)
+  Rendered folders/create.js.erb (Duration: 1.3ms | Allocations: 698)
+Completed 200 OK in 9ms (Views: 1.8ms | ActiveRecord: 1.7ms | Allocations: 4547)
+
+
+Started DELETE "/folders/1" for 92.13.244.1 at 2020-07-10 16:20:22 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#destroy as JS
+  Parameters: {"id"=>"1"}
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/folders_controller.rb:58:in `destroy'
+  [1m[36mFolder Destroy (0.8ms)[0m  [1m[31mDELETE FROM "folders" WHERE "folders"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/folders_controller.rb:58:in `destroy'
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/folders_controller.rb:58:in `destroy'
+  Rendering folders/destroy.js.erb
+  Rendered folders/destroy.js.erb (Duration: 0.3ms | Allocations: 99)
+Completed 200 OK in 11ms (Views: 1.5ms | ActiveRecord: 2.0ms | Allocations: 3385)
+
+
+Started GET "/" for 92.13.244.1 at 2020-07-10 16:22:37 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 3)
+  Rendered folders/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 976)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 24ms (Views: 8.6ms | ActiveRecord: 4.6ms | Allocations: 12258)
+
+
+Started GET "/folders/new" for 92.13.244.1 at 2020-07-10 16:22:44 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#new as JS
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/new.js.erb
+  Rendered folders/_form.html.erb (Duration: 1.5ms | Allocations: 872)
+  Rendered folders/new.js.erb (Duration: 2.2ms | Allocations: 1273)
+Completed 200 OK in 13ms (Views: 3.4ms | ActiveRecord: 2.3ms | Allocations: 6529)
+
+
+Started POST "/folders" for 92.13.244.1 at 2020-07-10 16:22:49 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#create as JS
+  Parameters: {"authenticity_token"=>"ohl7+ZIWEny8gGt9AAoQW0RAKHy/xQjApWskldhujNdQqqd9gmC1HCY7XRzwBOf52kEFRkObAE6JNscioEHx+Q==", "folder"=>{"name"=>"Patent folder"}, "commit"=>"Create Folder"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  [1m[36mFolder Create (0.4ms)[0m  [1m[32mINSERT INTO "folders" ("name", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Patent folder"], ["created_at", "2020-07-10 16:22:49.443062"], ["updated_at", "2020-07-10 16:22:49.443062"], ["user_id", 1]]
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  Rendering folders/create.js.erb
+  Rendered folders/_folder.html.erb (Duration: 0.5ms | Allocations: 301)
+  Rendered folders/create.js.erb (Duration: 1.3ms | Allocations: 675)
+Completed 200 OK in 9ms (Views: 1.8ms | ActiveRecord: 1.7ms | Allocations: 4496)
+
+
+Started GET "/folders/2" for 92.13.244.1 at 2020-07-10 16:22:52 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mFolder Load (0.5ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  Rendered folders/show.html.erb within layouts/application (Duration: 0.5ms | Allocations: 234)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 11ms (Views: 7.5ms | ActiveRecord: 1.0ms | Allocations: 5325)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateDocuments (20200710162641)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "documents" ("id" bigserial primary key, "title" character varying, "url" character varying, "text" text, "folder_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_404da7ca3d"
+FOREIGN KEY ("folder_id")
+  REFERENCES "folders" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateDocuments (20200710162641)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "documents" ("id" bigserial primary key, "title" character varying, "url" character varying, "text" text, "folder_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_404da7ca3d"
+FOREIGN KEY ("folder_id")
+  REFERENCES "folders" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DropDocuments (20200710162949)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "documents"[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200710162949"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateDocuments (20200710163306)
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "documents" ("id" bigserial primary key, "title" character varying, "url" character varying, "text" text, "folder_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_404da7ca3d"
+FOREIGN KEY ("folder_id")
+  REFERENCES "folders" ("id")
+)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE  INDEX  "index_documents_on_folder_id" ON "documents"  ("folder_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200710163306"]]
+  [1m[35m (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 16:34:00 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [1 times] (Duration: 1.0ms | Allocations: 400)
+  Rendered folders/index.html.erb within layouts/application (Duration: 9.1ms | Allocations: 4693)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 73ms (Views: 46.6ms | ActiveRecord: 7.1ms | Allocations: 36793)
+
+
+Started GET "/folders/new" for 92.13.244.1 at 2020-07-10 16:34:06 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#new as JS
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/new.js.erb
+  Rendered folders/_form.html.erb (Duration: 3.3ms | Allocations: 2327)
+  Rendered folders/new.js.erb (Duration: 4.0ms | Allocations: 2736)
+Completed 200 OK in 8ms (Views: 5.3ms | ActiveRecord: 0.2ms | Allocations: 5110)
+
+
+Started POST "/folders" for 92.13.244.1 at 2020-07-10 16:34:10 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#create as JS
+  Parameters: {"authenticity_token"=>"fM7u7iimYqf5hRQELb6f5VxJXKZb8hwUnUrQk4ntfyGOfTJqONDFx2M+ImXdsGhHwkhxnKesFJqxFzMk8cICDw==", "folder"=>{"name"=>"Test"}, "commit"=>"Create Folder"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  [1m[36mFolder Create (0.5ms)[0m  [1m[32mINSERT INTO "folders" ("name", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Test"], ["created_at", "2020-07-10 16:34:10.801793"], ["updated_at", "2020-07-10 16:34:10.801793"], ["user_id", 1]]
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  Rendering folders/create.js.erb
+  Rendered folders/_folder.html.erb (Duration: 0.7ms | Allocations: 301)
+  Rendered folders/create.js.erb (Duration: 1.7ms | Allocations: 652)
+Completed 200 OK in 12ms (Views: 2.4ms | ActiveRecord: 1.7ms | Allocations: 4790)
+
+
+Started GET "/folders/3" for 92.13.244.1 at 2020-07-10 16:34:14 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  Rendered folders/show.html.erb within layouts/application (Duration: 0.5ms | Allocations: 234)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 11ms (Views: 7.7ms | ActiveRecord: 0.4ms | Allocations: 5508)
+
+
+Started GET "/folders/3/edit" for 92.13.244.1 at 2020-07-10 16:34:19 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#edit as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/edit.html.erb within layouts/application
+  Rendered folders/_form.html.erb (Duration: 1.0ms | Allocations: 593)
+  Rendered folders/edit.html.erb within layouts/application (Duration: 2.4ms | Allocations: 960)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 11ms (Views: 7.9ms | ActiveRecord: 0.5ms | Allocations: 6147)
+
+
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 16:34:27 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [2 times] (Duration: 1.8ms | Allocations: 288)
+  Rendered folders/index.html.erb within layouts/application (Duration: 4.2ms | Allocations: 1167)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 9.0ms | ActiveRecord: 0.5ms | Allocations: 5748)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DropDocuments (20200710163755)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mDROP TABLE "documents"[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200710163755"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 16:59:21 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [2 times] (Duration: 0.9ms | Allocations: 500)
+  Rendered folders/index.html.erb within layouts/application (Duration: 6.6ms | Allocations: 4558)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 24ms (Views: 13.5ms | ActiveRecord: 0.6ms | Allocations: 16321)
+
+
+Started GET "/folders/2" for 92.13.244.1 at 2020-07-10 16:59:28 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  Rendered folders/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 228)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 5.2ms | ActiveRecord: 0.4ms | Allocations: 5495)
+
+
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 16:59:39 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [2 times] (Duration: 0.5ms | Allocations: 289)
+  Rendered folders/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 1166)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.7ms | ActiveRecord: 0.5ms | Allocations: 5714)
+
+
+Started GET "/folders/new" for 92.13.244.1 at 2020-07-10 16:59:46 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#new as JS
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/new.js.erb
+  Rendered folders/_form.html.erb (Duration: 1.2ms | Allocations: 821)
+  Rendered folders/new.js.erb (Duration: 2.0ms | Allocations: 1219)
+Completed 200 OK in 6ms (Views: 3.2ms | ActiveRecord: 0.3ms | Allocations: 3559)
+
+
+Started POST "/folders" for 92.13.244.1 at 2020-07-10 16:59:50 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#create as JS
+  Parameters: {"authenticity_token"=>"zYJQHQy5fvRcLqHMBn6UBnwxYeaqJNRfMm690uJH9Zo/MYyZHM/ZlMaVl632cGOk4jBM3FZ63NEeM15lmmiItA==", "folder"=>{"name"=>"Patent folder"}, "commit"=>"Create Folder"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  [1m[36mFolder Create (0.8ms)[0m  [1m[32mINSERT INTO "folders" ("name", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Patent folder"], ["created_at", "2020-07-10 16:59:50.347212"], ["updated_at", "2020-07-10 16:59:50.347212"], ["user_id", 1]]
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/folders_controller.rb:30:in `block in create'
+  Rendering folders/create.js.erb
+  Rendered folders/_folder.html.erb (Duration: 0.7ms | Allocations: 299)
+  Rendered folders/create.js.erb (Duration: 1.6ms | Allocations: 646)
+Completed 200 OK in 10ms (Views: 2.0ms | ActiveRecord: 2.0ms | Allocations: 4601)
+
+
+Started GET "/folders/4" for 92.13.244.1 at 2020-07-10 16:59:53 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  Rendered folders/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 75)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 5.2ms | ActiveRecord: 0.6ms | Allocations: 5100)
+
+
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 17:10:28 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.4ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [3 times] (Duration: 0.9ms | Allocations: 587)
+  Rendered folders/index.html.erb within layouts/application (Duration: 4.0ms | Allocations: 1769)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 13ms (Views: 8.9ms | ActiveRecord: 0.8ms | Allocations: 7544)
+
+
+Started GET "/folders/2" for 92.13.244.1 at 2020-07-10 17:10:33 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  Rendered folders/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 228)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 10ms (Views: 6.7ms | ActiveRecord: 0.5ms | Allocations: 5397)
+
+
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 17:10:40 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [3 times] (Duration: 0.6ms | Allocations: 428)
+  Rendered folders/index.html.erb within layouts/application (Duration: 2.5ms | Allocations: 1315)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 8ms (Views: 6.1ms | ActiveRecord: 0.5ms | Allocations: 5877)
+
+
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 17:10:56 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [3 times] (Duration: 1.3ms | Allocations: 678)
+  Rendered folders/index.html.erb within layouts/application (Duration: 8.4ms | Allocations: 4994)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 41ms (Views: 16.1ms | ActiveRecord: 6.9ms | Allocations: 23185)
+
+
+Started GET "/folders/2" for 92.13.244.1 at 2020-07-10 17:11:02 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  Rendered folders/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 235)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 9ms (Views: 6.3ms | ActiveRecord: 0.5ms | Allocations: 5526)
+
+
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 17:23:55 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [3 times] (Duration: 0.9ms | Allocations: 587)
+  Rendered folders/index.html.erb within layouts/application (Duration: 3.3ms | Allocations: 1771)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 8.7ms | ActiveRecord: 0.7ms | Allocations: 7561)
+
+
+Started GET "/folders/2" for 92.13.244.1 at 2020-07-10 17:24:00 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  Rendered folders/show.html.erb within layouts/application (Duration: 124.5ms | Allocations: 69593)
+Completed 500 Internal Server Error in 129ms (ActiveRecord: 0.2ms | Allocations: 70800)
+
+
+  
+ActionView::Template::Error (undefined method `edit_document_path' for #<#<Class:0x00007f63ac070de8>:0x00007f6394045b38>
+Did you mean?  folder_document_path):
+    2: 
+    3: <div class="Folder">
+    4:   <%= content_tag :span, "#{@folder.name}", class: "folder-name" %>
+    5:   <%= link_to 'Edit', edit_document_path(@folder) %>
+    6: </div>
+    7: 
+    8: <div id="documents">
+  
+app/views/folders/show.html.erb:5
+Started GET "/folders/2" for 92.13.244.1 at 2020-07-10 17:24:39 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  Rendered folders/show.html.erb within layouts/application (Duration: 1.6ms | Allocations: 3625)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.3ms | Allocations: 5455)
+
+
+  
+ActionView::Template::Error (uninitialized constant Folder::Document):
+     6: </div>
+     7: 
+     8: <div id="documents">
+     9:   <%= render @folder.documents %>
+    10: </div>
+    11: 
+    12: <div>
+  
+app/views/folders/show.html.erb:9
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mFolder Load (0.4ms)[0m  [1m[34mSELECT "folders".* FROM "folders" ORDER BY "folders"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateDocuments (20200710172958)
+  [1m[35m (1.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "documents" ("id" bigserial primary key, "title" character varying, "url" character varying, "text" text, "folder_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_404da7ca3d"
+FOREIGN KEY ("folder_id")
+  REFERENCES "folders" ("id")
+)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE  INDEX  "index_documents_on_folder_id" ON "documents"  ("folder_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200710172958"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(4701171503735475720)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/folders/2" for 92.13.244.1 at 2020-07-10 17:30:21 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  [1m[36mDocument Load (0.3ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."folder_id" = $1[0m  [["folder_id", 2]]
+  ↳ app/views/folders/show.html.erb:9
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 3)
+  Rendered folders/show.html.erb within layouts/application (Duration: 27.1ms | Allocations: 13380)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 65ms (Views: 42.6ms | ActiveRecord: 11.0ms | Allocations: 33086)
+
+
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 17:30:33 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [3 times] (Duration: 1.0ms | Allocations: 599)
+  Rendered folders/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 1817)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 11ms (Views: 7.4ms | ActiveRecord: 0.5ms | Allocations: 6978)
+
+
+Started GET "/folders/2" for 92.13.244.1 at 2020-07-10 17:30:36 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mFolder Load (0.2ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/folders_controller.rb:69:in `set_folder'
+  Rendering folders/show.html.erb within layouts/application
+  [1m[36mDocument Load (0.2ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."folder_id" = $1[0m  [["folder_id", 2]]
+  ↳ app/views/folders/show.html.erb:9
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 3)
+  Rendered folders/show.html.erb within layouts/application (Duration: 3.1ms | Allocations: 1672)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 10ms (Views: 8.2ms | ActiveRecord: 0.6ms | Allocations: 6711)
+
+
+Started GET "/folders" for 92.13.244.1 at 2020-07-10 17:30:39 +0000
+Cannot render console from 92.13.244.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoldersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  Rendering folders/index.html.erb within layouts/application
+  [1m[36mFolder Load (0.3ms)[0m  [1m[34mSELECT "folders".* FROM "folders" WHERE "folders"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/folders/index.html.erb:14
+  Rendered collection of folders/_folder.html.erb [3 times] (Duration: 0.7ms | Allocations: 426)
+  Rendered folders/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1314)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 10ms (Views: 7.1ms | ActiveRecord: 0.5ms | Allocations: 5892)
+
+

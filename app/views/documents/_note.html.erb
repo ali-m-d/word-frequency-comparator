@@ -1,0 +1,7 @@
+<div class="document">
+    <div>
+        <% content_tag :span, "#{document.title} (#{time_ago_in_words document.created_at} ago)", class: "document-title" %>
+        <% link_to "Delete document", [@folder, document], method: :delete %>
+    </div>
+    <div><%= simple_format document.document %></div>
+</div>

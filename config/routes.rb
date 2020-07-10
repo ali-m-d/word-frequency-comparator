@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
   root to: 'folders#index'
-  resources :folders
+  resources :folders do
+    resources :documents, only: [:create, :destroy]
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
   

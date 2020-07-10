@@ -12,16 +12,17 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt update && sudo apt install yarn
 
 # install webpack
-
-sudo -u postgres
+sudo -u postgres createuser -s ubuntu
+sudo -u postgres createdb ubuntu
+sudo su postgres
 psql
 ALTER USER "ubuntu" WITH SUPERUSER;
-\q
+Ctrl-D
 exit
 
 sudo su postgres
 psql
-CREATE ROLE ali_m_d WITH LOGIN PASSWORD 'ka76wr'
+CREATE ROLE ali_m_d WITH LOGIN PASSWORD 'ka76wr';
 CREATE DATABASE word_frequency_comparator_development OWNER ali_m_d;
 Ctrl-D
-\q
+exit

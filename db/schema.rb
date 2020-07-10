@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_142446) do
+ActiveRecord::Schema.define(version: 2020_07_10_172958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "documents", force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.text "text"
+    t.bigint "folder_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["folder_id"], name: "index_documents_on_folder_id"
+  end
 
   create_table "folders", force: :cascade do |t|
     t.string "name"
@@ -31,5 +41,6 @@ ActiveRecord::Schema.define(version: 2020_07_10_142446) do
     t.boolean "guest"
   end
 
+  add_foreign_key "documents", "folders"
   add_foreign_key "folders", "users"
 end
