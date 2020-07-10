@@ -1,0 +1,15 @@
+
+<div class="login-page">
+    <div class="form">
+        <%= form_for(:user, url: sessions_path) do |f| %> 
+            <form class="login-form" autocomplete="off">
+                <input autocomplete="off" type="text" name="user[username]" id="user_username" placeholder="username">
+                <input type="password" name="user[password]" id="user_password" placeholder="password">
+                <p/>
+                <input type="submit" class="button" value="Login">
+                <p class="message">Not registered? <%= link_to "Create an account", new_user_path %></p>
+            </form>
+        <% end %>
+    </div>
+</div>
+

@@ -1,0 +1,28 @@
+<div class="login-page">
+    <div class="form">
+        <%= form_for(:user, url: users_path) do |f| %> 
+            <form class="login-form" autocomplete="off">
+                <input autocomplete="off"  type="text" name="user[username]" id="user_username" placeholder="username">
+                <input type="password" name="user[password]" id="user_password" placeholder="password">
+                <div class="registration-errors">
+                    
+    <% if @user.errors.any? %>
+    <div>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% else %>
+    </p>
+  <% end %>
+ 
+  </div>
+                
+                <input type="submit" class="button" value="Register">
+                <input type="button" class="button" value="Back" style="width: 100%;" onclick="location.href='<%= root_path %>'">
+            </form>
+        <% end %>
+    </div>
+</div>
