@@ -11,15 +11,15 @@ default: &default
   
 development:
   <<: *default
-  database: word-frequency-comparator_development
+  database: word_frequency_comparator_development
 
 test:
   <<: *default
-  database: word-frequency-comparator_test
+  database: word_frequency_comparator_test
 
 production:
   <<: *default
-  database: word-frequency-comparator_production
+  database: word_frequency_comparator_production
   username: word-frequency-comparator
   password: ka76wr
 
