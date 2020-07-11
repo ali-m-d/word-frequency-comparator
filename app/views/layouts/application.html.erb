@@ -12,15 +12,14 @@
 <body id="body">
 <header>
   <% if logged_in? %>
-        <div class="d-none d-md-block container-fluid login-strip">
-            <div class="login-text">
-              <span class="green">Logged in as </span><span class="white"><%= current_user.username %></span><span class="green"> |</span>
-            </div>
-            
-            <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-sm btn-outline-light btn-logout", form_tag: "btn-logout-form" %>
-            
+    <div class="d-none d-md-block container-fluid login-strip">
+        <div class="login-text">
+          <span class="green">Logged in as </span><span class="white"><%= current_user.username %></span><span class="green"> |</span>
         </div>
-      <% end %>
+        <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-sm btn-outline-light btn-logout",form_tag: "btn-logout-form" %>
+    </div>
+  <% end %>
+  
   <nav class="navbar navbar-light">
     <a class="navbar-brand" href="#">
       <img src="<%= asset_path("doc.png") %>" height="40" width="40" class="align-top"><span class="main-heading">
@@ -32,8 +31,14 @@
   </nav>
   
   <div>
-  <div class="alert" height="20">
-    <span class="alert-text"></span>
+  <div class="alert container-fluid" height="20">
+    <span class="alert-text">
+      <% if flash.any? %>
+        <% flash.each do |type,msg| %>
+          <%= msg %>
+        <% end %>
+    <% end %>
+    </span>
   </div>
 </div>
 </header>

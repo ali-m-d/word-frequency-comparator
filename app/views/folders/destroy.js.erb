@@ -1,6 +1,7 @@
 $('.delete').bind('ajax:success', function() {
     $(this).closest('tr').fadeOut();
     $('.alert-text').text("Folder successfully deleted");
-    $('.alert-text').fadeOut(3000);
+    $('.alert-text').fadeIn();
+    $('.alert-text').fadeOut(4000);
 });
 

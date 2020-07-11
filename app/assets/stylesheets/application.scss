@@ -18,19 +18,18 @@
 @font-face {font-family: 'OpenSans-Regular'; src: font-url("OpenSans-Regular.ttf") format('truetype')}
 @font-face {font-family: 'OpenSans-SemiBold'; src: font-url("OpenSans-SemiBold.ttf") format('truetype')}
 @font-face {font-family: 'OpenSans-Bold'; src: font-url("OpenSans-Bold.ttf") format('truetype')}
+$d-blue: #004c8c; $m-blue: #58a5ef; $l-blue: #58a5f0; $yellow: #FFF842; $green: #00e676; $d-green: #00b248; $white: #ffffff; $red: #ff7043;
+.d-blue { color: $d-blue; } .green { color: $green; } .white { color: $white; } .pink { color: $pink }
 
 body { font-family: 'OpenSans-SemiBold'; font-size: .9em; }
 
-$d-blue: #004c8c; $m-blue: #58a5ef; $yellow: #FFF842; $green: #00e676; $white: #ffffff; $pink: #ff5c8d;
-.d-blue { color: $d-blue; } .green { color: $green; } .white { color: $white; } .pink { color: $pink }
-
 .main-heading { font-size: 3.5vw; }
-.alert { background-color: $green; color: black; padding: 2px; height: 30px;}
-.login-strip { position: absolute; top: 0; z-index: 1; text-align: right; padding-top: 7px; width: 100%; font-size: .8em; display: inline-block; }
+.alert { background-color: $green; color: black; padding: 2px; height: 30px; border-radius: 0; padding-left: 16px; }
+.login-strip { position: absolute; top: 0; z-index: 1; text-align: right; padding-top: 8px; padding-right: 16px; width: 100%; font-size: 12px; }
 .login-text { display: inline-block; }
-.login-strip form { width: 30px; display: inline-block; }
-.btn-logout { font-size: .9em; display: inline; }
-.navbar { background-color: $d-blue }
+.login-strip form { width: 60px; display: inline-block; }
+.btn-logout { font-size: 12px; }
+.navbar { background-color: $d-blue; }
 .login-strip {
     a:visited { color: $green; }
     a:hover, a:active { text-decoration: underline; background-color: $d-blue; }    

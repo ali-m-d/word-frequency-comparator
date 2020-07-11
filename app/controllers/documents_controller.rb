@@ -15,14 +15,16 @@ class DocumentsController < ApplicationController
         # init new doc object
         @document = @folder.documents.new(document_params)
         # generate url compatible with Net::HTTP
-        escaped = URI.escape("http://boilerpipe-web.appspot.com/extract?url=#{@document.url}&output=text")
-        uri = URI.parse(escaped)
-        # for manual scraping:
-            # html = Net::HTTP.get(uri)
-            # text = Nokogiri::HTML(html).text
-        # scrape text through boilerpipe api  
-        text = Net::HTTP.get(uri).gsub("\n"," ")
-        @document.text = text
+        if @document.url
+            escaped = URI.escape("http://boilerpipe-web.appspot.com/extract?url=#{@document.url}&output=text")
+            uri = URI.parse(escaped)
+            # for manual scraping:
+                # html = Net::HTTP.get(uri)
+                # text = Nokogiri::HTML(html).text
+            # scrape text through boilerpipe api  
+            text = Net::HTTP.get(uri).gsub("\n"," ")
+            @document.text = text
+        end
         
         if @document.save
             redirect_to folders_url, notice: "Document added successfully"

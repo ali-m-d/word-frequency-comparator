@@ -1,3 +1,6 @@
 $('#new-folder form').remove();
 $('#new-folder a').show();
 $('table#folders tbody').append("<%= j render @folder %>")
+$('.alert-text').text("Folder successfully created");
+$('.alert-text').fadeIn();
+$('.alert-text').fadeOut(4000);
