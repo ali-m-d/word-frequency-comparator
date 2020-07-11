@@ -1,0 +1,37 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap/scss/bootstrap";
+
+@font-face {font-family: 'OpenSans-Regular'; src: font-url("OpenSans-Regular.ttf") format('truetype')}
+@font-face {font-family: 'OpenSans-SemiBold'; src: font-url("OpenSans-SemiBold.ttf") format('truetype')}
+@font-face {font-family: 'OpenSans-Bold'; src: font-url("OpenSans-Bold.ttf") format('truetype')}
+
+body { font-family: 'OpenSans-SemiBold'; font-size: .9em; }
+
+$d-blue: #004c8c; $m-blue: #58a5ef; $yellow: #FFF842; $green: #00e676; $white: #ffffff; $pink: #ff5c8d;
+.d-blue { color: $d-blue; } .green { color: $green; } .white { color: $white; } .pink { color: $pink }
+
+.main-heading { font-size: 3.5vw; }
+.alert { background-color: $green; color: black; padding: 2px; height: 30px;}
+.login-strip { position: absolute; top: 0; z-index: 1; text-align: right; padding-top: 7px; width: 100%; font-size: .8em; display: inline-block; }
+.login-text { display: inline-block; }
+.login-strip form { width: 30px; display: inline-block; }
+.btn-logout { font-size: .9em; display: inline; }
+.navbar { background-color: $d-blue }
+.login-strip {
+    a:visited { color: $green; }
+    a:hover, a:active { text-decoration: underline; background-color: $d-blue; }    
+}

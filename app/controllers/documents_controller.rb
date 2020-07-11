@@ -1,8 +1,29 @@
 class DocumentsController < ApplicationController
-    before_action :set_folder, only: [:create, :destroy]
+    require 'nokogiri'
+    require 'net/http'
+    # require 'capybara/poltergeist'
+    # Capybara.javascript_driver = :poltergeist
     
+    before_action :set_folder, only: [:new, :create, :destroy]
+
+    # GET /folders/new
+    def new
+        @document = @folder.documents.new
+    end
+
     def create
+        # init new doc object
         @document = @folder.documents.new(document_params)
+        # generate url compatible with Net::HTTP
+        escaped = URI.escape("http://boilerpipe-web.appspot.com/extract?url=#{@document.url}&output=text")
+        uri = URI.parse(escaped)
+        # for manual scraping:
+            # html = Net::HTTP.get(uri)
+            # text = Nokogiri::HTML(html).text
+        # scrape text through boilerpipe api  
+        text = Net::HTTP.get(uri).gsub("\n"," ")
+        @document.text = text
+        
         if @document.save
             redirect_to folders_url, notice: "Document added successfully"
         else
@@ -11,9 +32,13 @@ class DocumentsController < ApplicationController
     end
     
     def destroy
-        @document = @folder.document.find(params[:id])
+        @document = @folder.documents.find(params[:id])
         @document.destroy
-        redirect_to folders_url, notice: "Document deleted"
+        respond_to do |format|
+          format.js
+          format.html { redirect_to folders_url }
+          format.json { head :no_content }
+        end
     end
     
     private
@@ -22,6 +47,6 @@ class DocumentsController < ApplicationController
     end
     
     def document_params
-        params.require(:document).permit(:title, :document)
+        params.require(:document).permit(:title, :url)
     end
 end

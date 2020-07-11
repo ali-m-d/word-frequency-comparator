@@ -1,0 +1,6 @@
+<div class="document">
+    <div>
+        <%= content_tag :span, "#{document.title} (#{time_ago_in_words document.created_at} ago)", class: "document-title" %>
+        <%= link_to "Delete document", [current_user.folders.find(document.folder_id), document], method: :delete, remote:true, class: "delete-doc" %>
+    </div>   
+</div>

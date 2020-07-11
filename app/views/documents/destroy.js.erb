@@ -1,0 +1,5 @@
+$('.delete-doc').bind('ajax:success', function() {
+    $(this).parent().fadeOut();
+    $('.alert-text').text("Folder sucessfully deleted");
+    $('.alert-text').fadeOut(3000);
+});

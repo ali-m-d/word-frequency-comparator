@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
   root to: 'folders#index'
   resources :folders do
-    resources :documents, only: [:create, :destroy]
+    resources :documents
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
+  
+  # , only: [:new, :create, :destroy]
   
   get "/login" => "sessions#new", as: "login"
   delete "/logout" => "sessions#destroy", as: "logout"

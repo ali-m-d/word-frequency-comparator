@@ -1,6 +1,10 @@
 <tr>
     <td><%= folder.name %></td>
+    <% if folder.documents.any? %>
+        <td><%= render folder.documents %></td>
+    <% end %>
     <td><%= link_to 'Show', folder %></td>
     <td><%= link_to 'Edit', edit_folder_path(folder) %></td>
     <td><%= link_to 'Destroy', folder, method: :delete, data: { confirm: 'Are you sure?', remote:true }, class: "delete" %></td>
+    <td><%= link_to 'Add document', new_folder_document_path(folder), remote:true, class: "new-doc" %>
 </tr>
