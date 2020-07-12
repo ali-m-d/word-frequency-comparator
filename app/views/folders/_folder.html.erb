@@ -1,18 +1,16 @@
-<div class="card">
-    <div class="card-header" id="heading<%= folder.id %>">
-        <h5>
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<%= folder.id %>" aria-expanded="true" aria-controls="collapse<%= folder.id %>">
-               <%= folder.name %> 
-            </button>
-        </h5>
+<div class="folder" id="<%= folder.id %>">
+    <div class="card">
+        <div class="card-header collapsed" role="button" data-toggle="collapse" data-target="#collapse<%= folder.id %>" aria-expanded="true" aria-controls="collapse<%= folder.id %>">
+            <%= folder.name %>
+        </div>
     </div>
-</div>
-<div id="collapse<%= folder.id %>" class="collapse show" aria-labelledby="heading<%= folder.id %>" data-parent="#accordion">
-    <div class="card-body">
-        <%= link_to 'Destroy', folder, method: :delete, data: { confirm: 'Are you sure?', remote:true }, class: "delete" %><br>
-        <%= link_to 'Add document', new_folder_document_path(folder), remote:true, class: "new-doc" %><br>
-        <% if folder.documents.any? %>
-            <%= render folder.documents %>
-        <% end %>
+    <div id="collapse<%= folder.id %>" class="collapse" aria-labelledby="heading<%= folder.id %>" data-parent="#accordion">
+        <div class="card-body">
+            <%= link_to 'Destroy', folder, method: :delete, data: { remote:true }, class: "delete", id: "#{folder.id}" %><br>
+            <%= link_to 'Add document', new_folder_document_path(folder), remote:true, class: "new-doc" %><br>
+            <% if folder.documents.any? %>
+                <%= render folder.documents %>
+            <% end %>
+        </div>
     </div>
 </div>

@@ -5,23 +5,7 @@
   <div id="accordion">
     <%= render @folders %>
   </div>
-  
-  <table id="folders">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-  
-    <tbody>
-      <%= render @folders %>
-    </tbody>
-  </table>
-  
-  <br>
   <div id="new-folder">
-    <%= link_to 'New Folder', new_folder_path, remote: true, id: "folderButton" %>
   </div>
 </div>
 

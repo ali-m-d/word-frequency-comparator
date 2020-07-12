@@ -10,37 +10,38 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-light">
-    <div class="container" style="position: relative;">
-    <span class="d-none d-md-block login-strip" style="width: 100%;" >
-      <% if logged_in? %>
-        <span class="green">Logged in as </span><span class="white"><%= current_user.username %></span>
-      <% end %>
-    </span>
-      <a class="navbar-brand" href="#">
-        <img src="<%= asset_path("doc.png") %>" height="40" width="40" class="align-top"><span class="main-heading">
-          <span class="green">Word</span><span class="white">Frequency</span><span class="green">Comparator</span>
-        </span>
-      </a>
-      <ul class="navbar-nav ml-auto login">
-      </ul>
-    </div>
-  </nav>
-  
-  <div class="alert" height="20">
-    <div class="container">
-    <span class="alert-text">
-      <% if flash.any? %>
-        <% flash.each do |type,msg| %>
-          <%= msg %>
-        <% end %>
+<nav class="navbar navbar-light">
+  <div class="container" style="position: relative;">
+  <span class="d-none d-md-block login-strip" style="width: 100%;" >
+    <% if logged_in? %>
+      <span class="green">Logged in as </span><span class="white"><%= current_user.username %></span>
     <% end %>
-    </span>
-    </div>
+  </span>
+    <a class="navbar-brand" href="#">
+      <img src="<%= asset_path("doc.png") %>" height="40" width="40" class="align-top"><span class="main-heading">
+        <span class="green">Word</span><span class="white">Frequency</span><span class="green">Comparator</span>
+      </span>
+    </a>
+    <ul class="navbar-nav ml-auto login">
+    </ul>
+  </div>
+</nav>
+  
+<div class="alert" height="20">
+  <div class="container">
+  <span class="alert-text">
+    <% if flash.any? %>
+      <% flash.each do |type,msg| %>
+        <%= msg %>
+      <% end %>
+    <% end %>
+  </span>
   </div>
 </div>
+
 <nav id="menu" class="navbar navbar-light menu">
   <div class="container menu-bar">
+    <% if logged_in? %>
     <ul class="navbar-nav flex-row">
       <li>
         <div class="nav-item menu-item">
@@ -58,6 +59,7 @@
         </div>
       </li>
     </ul>
+    <% end %>
   </div>
 </nav>
 

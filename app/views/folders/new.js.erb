@@ -1,4 +1,5 @@
-$('#new-folder a').parent().append("<%= j render 'form', folder: @folder %>")
+$('#new-folder').parent().append("<%= j render 'form', folder: @folder %>")
 $('#folderModal').modal('show');
+$('.text-field').val('');
 
   

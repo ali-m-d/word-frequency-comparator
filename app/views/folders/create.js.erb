@@ -1,6 +1,5 @@
 $('#folderModal').modal('hide');
-$('#new-folder a').show();
-$('table#folders tbody').append("<%= j render @folder %>")
+$('#accordion').append("<%= j render @folder %>")
 $('.alert-text').text("Folder successfully created");
 $('.alert-text').fadeIn();
 $('.alert-text').fadeOut(5000);
