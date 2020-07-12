@@ -1,22 +1,36 @@
-<%= form_with(model: folder) do |form| %>
-  <% if folder.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
-
-      <ul>
-        <% folder.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<div id="folderModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg" role="content">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Folder</h4>
+        <button type="button" class="close" data-dismiss="modal">
+            &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with(model: folder) do |form| %>
+          <% if folder.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+        
+              <ul>
+                <% folder.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        
+          <div class="field">
+            <%= form.label :name %>
+            <%= form.text_field :name %>
+          </div>
+        
+          <div class="actions">
+            <%= form.submit %>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+        </div> <!-- end of modal body -->
+    </div> <!-- end of modal content -->
+  </div> <!-- end of dialog -->
+</div> <!-- end of modal -->

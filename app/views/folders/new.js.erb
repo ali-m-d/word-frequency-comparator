@@ -1,1 +1,4 @@
-$('#new-folder a').hide().parent().append("<%= j render 'form', folder: @folder %>")
+$('#new-folder a').parent().append("<%= j render 'form', folder: @folder %>")
+$('#folderModal').modal('show');
+
+  

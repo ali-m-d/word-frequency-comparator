@@ -1,0 +1,1 @@
+<%= button_to "Logout", logout_path, method: :delete, class: "btn btn-sm btn-outline-light btn-logout",form_tag: "btn-logout-form" %>
