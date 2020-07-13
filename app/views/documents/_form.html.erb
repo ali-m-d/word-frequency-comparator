@@ -1,15 +1,27 @@
-<div>
-  <%= form_for([@folder, @folder.documents.new]) do |f| %>
+<div id="documentModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg" role="content">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Folder</h4>
+        <button type="button" class="close" data-dismiss="modal">
+            &times;
+        </button>
+      </div>
+      <div class="modal-body">
+  <%= form_for([@folder, @folder.documents.new], :remote => true) do |f| %>
     <div class="field">
       <%= f.label :title %>
       <%= f.text_field :title %>
     </div>
     <div class="field">
-      <%= f.label :url %>
+      <%= f.label :url, "URL" %>
       <%= f.text_field :url %>
     </div>
     <div class="actions">
-      <%= f.submit "Add new document" %>
+      <%= f.submit "Add document", id: "submitFor#{ @folder.id}" %>
     </div>
   <% end %>
-</div>
+  </div> <!-- end of modal body -->
+    </div> <!-- end of modal content -->
+  </div> <!-- end of dialog -->
+</div> <!-- end of modal -->

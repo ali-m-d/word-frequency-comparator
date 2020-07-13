@@ -12,7 +12,6 @@
           <% if folder.errors.any? %>
             <div id="error_explanation">
               <h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
-        
               <ul>
                 <% folder.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
@@ -23,7 +22,7 @@
         
           <div class="field">
             <%= form.label :name %>
-            <%= form.text_field :name, placeholder: "", class: "text-field" %>
+            <%= form.text_field :name, placeholder: "", class: "text-field col-12 col-sm-10" %>
           </div>
         
           <div class="actions">

@@ -1,8 +1,6 @@
 class DocumentsController < ApplicationController
     require 'nokogiri'
     require 'net/http'
-    # require 'capybara/poltergeist'
-    # Capybara.javascript_driver = :poltergeist
     
     before_action :set_folder, only: [:new, :create, :destroy]
 
@@ -15,7 +13,7 @@ class DocumentsController < ApplicationController
         # init new doc object
         @document = @folder.documents.new(document_params)
         # generate url compatible with Net::HTTP
-        if @document.url
+        unless @document.url == ""
             escaped = URI.escape("http://boilerpipe-web.appspot.com/extract?url=#{@document.url}&output=text")
             uri = URI.parse(escaped)
             # for manual scraping:
@@ -27,7 +25,12 @@ class DocumentsController < ApplicationController
         end
         
         if @document.save
-            redirect_to folders_url, notice: "Document added successfully"
+            # redirect_to folders_url, notice: "Document added successfully"
+            respond_to do |format|
+                format.js
+                format.html { redirect_to folders_url }
+                format.json { head :no_content }
+            end
         else
             redirect_to folders_url, alert: "Unable to add document"
         end

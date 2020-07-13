@@ -26,16 +26,16 @@
     </ul>
   </div>
 </nav>
-  
+   
 <div class="alert" height="20">
   <div class="container">
-  <span class="alert-text">
-    <% if flash.any? %>
-      <% flash.each do |type,msg| %>
-        <%= msg %>
+    <span class="alert-text">
+      <% if flash.any? %>
+        <% flash.each do |type,msg| %>
+          <%= msg %>
+        <% end %>
       <% end %>
-    <% end %>
-  </span>
+    </span>
   </div>
 </div>
 

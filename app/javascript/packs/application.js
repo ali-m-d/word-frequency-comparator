@@ -12,9 +12,9 @@ import JQuery from 'jquery'
 window.$ = window.JQuery = JQuery;
 
 $(document).ready(function () {
-   setTimeout(function() {
-      $('.alert-text').fadeOut();
-   }, 4000);
+    setTimeout(function() {
+        $('.alert-text').fadeOut();
+    }, 4000);
 });
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

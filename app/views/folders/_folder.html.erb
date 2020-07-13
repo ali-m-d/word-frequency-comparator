@@ -1,16 +1,24 @@
 <div class="folder" id="<%= folder.id %>">
     <div class="card">
-        <div class="card-header collapsed" role="button" data-toggle="collapse" data-target="#collapse<%= folder.id %>" aria-expanded="true" aria-controls="collapse<%= folder.id %>">
-            <%= folder.name %>
+        <div class="card-header collapsed d-flex" role="button" data-toggle="collapse" data-target="#collapse<%= folder.id %>" aria-expanded="true" aria-controls="collapse<%= folder.id %>">
+            <div>
+                <%= folder.name %>
+            </div>
+            <div class="ml-auto">      
+                <%= link_to 'Add Doc', new_folder_document_path(folder), remote:true, id: "documentButton" %>
+            </div>
         </div>
     </div>
     <div id="collapse<%= folder.id %>" class="collapse" aria-labelledby="heading<%= folder.id %>" data-parent="#accordion">
         <div class="card-body">
-            <%= link_to 'Destroy', folder, method: :delete, data: { remote:true }, class: "delete", id: "#{folder.id}" %><br>
-            <%= link_to 'Add document', new_folder_document_path(folder), remote:true, class: "new-doc" %><br>
-            <% if folder.documents.any? %>
-                <%= render folder.documents %>
-            <% end %>
+            <div id="docsOfFolder<%= folder.id %>">
+                <% if folder.documents.any? %>
+                    <%= render folder.documents %>
+                <% end %>
+            </div>
+            <div class="d-flex">
+                <%= link_to 'Destroy', folder, method: :delete, data: { remote:true }, id: "#{folder.id}", class: "delete ml-auto" %>
+            </div>
         </div>
     </div>
 </div>

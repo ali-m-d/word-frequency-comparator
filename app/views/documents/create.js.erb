@@ -1,0 +1,7 @@
+$('#documentModal').modal('hide');
+var folderId = <%= j @document.folder_id %>
+var targetElement = '#docsOfFolder' + folderId;
+$(targetElement).prepend("<%= j render @document %>")
+$('.alert-text').text("Document created successfully");
+$('.alert-text').fadeIn();
+$('.alert-text').fadeOut(5000);
