@@ -1,6 +1,6 @@
 <div class="document">
-    <div>
-        <%= content_tag :span, "#{document.title} (#{time_ago_in_words document.created_at} ago)", class: "document-title" %>
-        <%= link_to "Delete document", [current_user.folders.find(document.folder_id), document], method: :delete, remote:true, class: "delete-doc" %>
+    <div class="d-flex">
+        <%= content_tag :span, "#{document.title}", class: "document-title" %>
+        <%= link_to "Delete document", [current_user.folders.find(document.folder_id), document], method: :delete, remote:true, class: "delete delete-doc ml-auto" %>
     </div>   
 </div>

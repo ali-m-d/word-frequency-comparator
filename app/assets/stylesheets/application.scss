@@ -14,7 +14,12 @@
  *= require_self
  */
 @import "bootstrap/scss/bootstrap";
-
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
 @font-face {font-family: 'OpenSans-Regular'; src: font-url("OpenSans-Regular.ttf") format('truetype')}
 @font-face {font-family: 'OpenSans-SemiBold'; src: font-url("OpenSans-SemiBold.ttf") format('truetype')}
 @font-face {font-family: 'OpenSans-Bold'; src: font-url("OpenSans-Bold.ttf") format('truetype')}
@@ -47,14 +52,17 @@ body { font-family: 'OpenSans-SemiBold'; font-size: .9em; background-color: $d-b
 .folder .card-header:nth-child(even) { background-color: $blue; }
 .folder .card { border-radius: 0; border: 0;  margin-bottom: 5px; }
 .folder .card-header { border-radius: 0; padding: 10px; }
+.folder .card-header svg { font-family: 'FontAwesome'; margin-left: 2px; margin-right: 8px; }
 .folder .card-header:hover { background-color: $green; box-shadow: 4px 4px 6px 0px rgba(0,0,0,0.75); }
-.folder .card-header a { text-transform: uppercase; color: $white; opacity: 1; }
-.folder .card-header a:hover { background-color: inherit; text-decoration: none; }
+.folder .card-header a { text-transform: uppercase; color: $white; opacity: 1; font-size: .9em; }
+.folder .card-header a:hover { background-color: inherit; text-decoration: none; text-shadow: 3px 3px 3px rgba(0,0,0,.7) }
+.folder .card-header .add { }
 .folder .card-body { padding: 10px; }
+.folder .card-body a { text-transform: uppercase; color: $white; opacity: 1; }
+.folder .card-body a:hover { background-color: inherit; text-decoration: none; text-shadow: 3px 3px 3px rgba(0,0,0,.8) }
+.folder .card-header .folder-name {  }
 #accordion .folder:nth-child(odd) .card-header { background-color: $l-blue; }
 #accordion .folder:nth-child(even) .card-header { background-color: $blue; }
-.folder .card-header a { text-transform: uppercase; font-size: .9em; }
-.folder .card-header a:hover { color: $d-blue; }
 .panel-footer { background-color: $green; }
 .footer-content { height: 50px; }
 
@@ -75,9 +83,8 @@ body { font-family: 'OpenSans-SemiBold'; font-size: .9em; background-color: $d-b
 .modal-body { background-color: $l-blue; }
 .modal-header { background-color: $d-blue; border-bottom: 0; }
 .modal button.close { color: $white; }
-.modal label { padding-right: 10px; }
-
-
+#folderModal form input { }
+#documentModal form input[type="text"] { margin-left: 10px; }
 
 
 

@@ -21,12 +21,12 @@
           <% end %>
         
           <div class="field">
-            <%= form.label :name %>
-            <%= form.text_field :name, placeholder: "", class: "text-field col-12 col-sm-10" %>
+            <%= form.label :name, class: "col-12 col-sm-2" %>
+            <%= form.text_field :name, placeholder: "", class: "text-field col-12 col-sm-8" %>
           </div>
         
           <div class="actions">
-            <%= form.submit %>
+            <%= form.submit nil, class: "col-12 col-sm-4" %>
           </div>
         <% end %>
         </div> <!-- end of modal body -->

@@ -1,4 +1,8 @@
+var collapseId = '#collapse' + <%= j @document.folder_id %>
+$(collapseId).collapse('show');
+console.log("collapse id is" + collapseId);
 $('#documentModal').modal('hide');
+
 var folderId = <%= j @document.folder_id %>
 var targetElement = '#docsOfFolder' + folderId;
 $(targetElement).prepend("<%= j render @document %>")

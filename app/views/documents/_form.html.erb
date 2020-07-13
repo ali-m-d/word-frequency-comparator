@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="content">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Add Folder</h4>
+        <h4 class="modal-title">Add Document</h4>
         <button type="button" class="close" data-dismiss="modal">
             &times;
         </button>
@@ -10,14 +10,14 @@
       <div class="modal-body">
   <%= form_for([@folder, @folder.documents.new], :remote => true) do |f| %>
     <div class="field">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
+      <%= f.label :title, class: "col-12 col-sm-1" %>
+      <%= f.text_field :title, class: "col-12 col-sm-10" %>
     </div>
     <div class="field">
-      <%= f.label :url, "URL" %>
-      <%= f.text_field :url %>
+      <%= f.label :url, "URL", class: "col-12 col-sm-1" %>
+      <%= f.text_field :url, class: "col-12 col-sm-10" %>
     </div>
-    <div class="actions">
+    <div class="actions col-12 col-sm-1">
       <%= f.submit "Add document", id: "submitFor#{ @folder.id}" %>
     </div>
   <% end %>

@@ -7,14 +7,24 @@ require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
 // require("jquery")
-import 'bootstrap';
 import JQuery from 'jquery'
-window.$ = window.JQuery = JQuery;
+import 'bootstrap';
+import '@fortawesome/fontawesome-free/js/all';
+import '@fortawesome/fontawesome-free/css/all';
 
+window.$ = window.JQuery = JQuery;
+var accordionShow = false
 $(document).ready(function () {
     setTimeout(function() {
         $('.alert-text').fadeOut();
     }, 4000);
+    
+    $('#documentButton').click(function() {
+        var collapseId = '#collapse' + $(this).parents('.folder').attr('id')
+        if ($(collapseId).hasClass('show')) {
+            accordionShow = true;
+        }
+    });
 });
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
