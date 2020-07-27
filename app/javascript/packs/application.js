@@ -3,27 +3,46 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-require("@rails/ujs").start()
-require("@rails/activestorage").start()
-require("channels")
+require("@rails/ujs").start();
+require("@rails/activestorage").start();
+require("channels");
 // require("jquery")
-import JQuery from 'jquery'
+import JQuery from 'jquery';
 import 'bootstrap';
 import '@fortawesome/fontawesome-free/js/all';
 import '@fortawesome/fontawesome-free/css/all';
 
 window.$ = window.JQuery = JQuery;
-var accordionShow = false
+var selectees = [];
+
 $(document).ready(function () {
     setTimeout(function() {
         $('.alert-text').fadeOut();
     }, 4000);
     
-    $('#documentButton').click(function() {
-        var collapseId = '#collapse' + $(this).parents('.folder').attr('id')
-        if ($(collapseId).hasClass('show')) {
-            accordionShow = true;
+    $('.checkbox').change(function() {
+        var folderId = $(this).attr("id").replace(/^\D+/g, '')
+        if ($(this).is(':checked') && !selectees.includes(folderId)) {
+            selectees.push(folderId);
+            console.log(selectees);
+        } else if($(this).is(':not(:checked)')) {
+            var newSelectees = selectees.filter(s => s !== folderId);
+            selectees = newSelectees;
+            console.log(selectees);
         }
+    });
+    
+    $('#compareBtn').click(function() {
+        jQuery.ajax({
+            url: '/selections',
+            type: 'POST',
+            data: {
+                selectees_array: JSON.stringify(selectees)
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
     });
 });
 // Uncomment to copy all static images under ../images to the output folder and reference

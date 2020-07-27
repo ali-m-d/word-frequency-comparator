@@ -1,0 +1,23 @@
+<div id="selectionModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg" role="content">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Enter Word</h4>
+        <button type="button" class="close" data-dismiss="modal">
+            &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@selection, :remote => true) do |f| %>
+          <div class="field">
+            <%= f.label :word, class: "col-12 col-sm-1" %>
+            <%= f.text_field :word, class: "col-12 col-sm-10" %>
+          </div>
+          <div class="actions col-12 col-sm-1">
+            <%= f.submit "Proceed to comparison", id: "submitFor#{@selection.id}" %>
+          </div>
+        <% end %>
+      </div> <!-- end of modal body -->
+    </div> <!-- end of modal content -->
+  </div> <!-- end of dialog -->
+</div> <!-- end of modal -->

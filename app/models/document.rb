@@ -1,3 +1,7 @@
 class Document < ApplicationRecord
-  belongs_to :folder
+    include PgSearch
+    
+    belongs_to :folder
+    
+    pg_search_scope :search, against: [:text]
 end
