@@ -7,12 +7,13 @@
             Results of Comparison
         </div>
         <div>
-            <%= @results %>
-            <% @results.map do |folder| %>
-                
-                
-            <% end %>    
-          
+            <% selection.selectees_json.each do |selectee|  %>
+                <p>
+                    The word "<%= selection.word %>" appears a total of
+                    <%= pluralize(selectee["tally"], 'time') %> in the documents
+                    contained in "<%= selectee["name"] %>"
+                </p>
+            <% end %>
         </div>
         <br>
     <% end %>

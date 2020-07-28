@@ -28,30 +28,29 @@ class SelectionsController < ApplicationController
     if params[:selectees_array]
       @selection = Selection.new(user: current_user)
       JSON.parse(params[:selectees_array]).each do |selectee|
-        new_selectees.store(selectee, 0)
+        @selection.selectees << selectee
       end
-      @selection.selectees_json = new_selectees
+      
       @selection.save!
-      new_selectees.each_key do |selectee|
-        @selection.selectees.create!(folder_id: selectee)
-      end
       redirect_to folders_url
     else
       @selection = Selection.last
       @selection.update(selection_params)
       @selection.save!
-      @results = {}
       
       if @selection.save
         @selection.selectees.each do |selectee|
-          folder = Folder.find(selectee.folder_id)
-          @results.store(folder.id, {"name": folder.name, "docs": []})
+          folder = Folder.find(selectee)
+          folder_hash = {folder_id: folder.id, "name": folder.name, "docs": []}
           folder.documents.search(@selection.word).with_pg_search_highlight.each do |doc|
-            @results[folder.id][:docs].push({"doc_id": doc.id, "doc_title": doc.title, "tally": doc.pg_search_highlight.split('<br>').length})
-            
+            folder_hash[:docs].push({"doc_id": doc.id, "doc_title": doc.title, "tally": doc.pg_search_highlight.split('<br>').length})
           end
-          # @results[folder.id].store("tally", @results[folder.id].docs.each{|doc| doc.tally}.sum)
-        end  
+          folder_tally = folder_hash[:docs].map{|doc| doc[:tally]}.sum
+          folder_hash.store("tally", folder_tally)
+          @selection.selectees_json.push(folder_hash)
+        end
+        
+        @selection.save
         
         respond_to do |format|
             format.js
@@ -96,6 +95,6 @@ class SelectionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def selection_params
-      params.require(:selection).permit(:new, :create, :show, :index, :destroy, :selectees_array, :word)
+      params.require(:selection).permit(:new, :create, :show, :index, :destroy, :selectees, :word)
     end
 end

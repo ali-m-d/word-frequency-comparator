@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_094134) do
+ActiveRecord::Schema.define(version: 2020_07_28_164631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,20 +33,13 @@ ActiveRecord::Schema.define(version: 2020_07_28_094134) do
     t.index ["user_id"], name: "index_folders_on_user_id"
   end
 
-  create_table "selectees", force: :cascade do |t|
-    t.bigint "selection_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "folder_id"
-    t.index ["selection_id"], name: "index_selectees_on_selection_id"
-  end
-
   create_table "selections", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "word"
-    t.json "selectees_json"
+    t.string "selectees", default: [], array: true
+    t.json "selectees_json", default: [], array: true
     t.index ["user_id"], name: "index_selections_on_user_id"
   end
 
@@ -60,6 +53,5 @@ ActiveRecord::Schema.define(version: 2020_07_28_094134) do
 
   add_foreign_key "documents", "folders"
   add_foreign_key "folders", "users"
-  add_foreign_key "selectees", "selections"
   add_foreign_key "selections", "users"
 end
