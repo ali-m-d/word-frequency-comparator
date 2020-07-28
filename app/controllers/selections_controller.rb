@@ -24,24 +24,35 @@ class SelectionsController < ApplicationController
   # POST /selections
   # POST /selections.json
   def create
-    
+    new_selectees = {}
     if params[:selectees_array]
       @selection = Selection.new(user: current_user)
-      JSON.parse(params[:selectees_array]).each do |s|
-        @selection.selectees_array << s
+      JSON.parse(params[:selectees_array]).each do |selectee|
+        new_selectees.store(selectee, 0)
       end
+      @selection.selectees_json = new_selectees
       @selection.save!
-        @selection.selectees_array.each do |s|
-          @selection.selectees.create!(folder_id: s)
-        end
+      new_selectees.each_key do |selectee|
+        @selection.selectees.create!(folder_id: selectee)
+      end
+      redirect_to folders_url
     else
       @selection = Selection.last
       @selection.update(selection_params)
       @selection.save!
+      @results = {}
       
-      
-  
       if @selection.save
+        @selection.selectees.each do |selectee|
+          folder = Folder.find(selectee.folder_id)
+          @results.store(folder.id, {"name": folder.name, "docs": []})
+          folder.documents.search(@selection.word).with_pg_search_highlight.each do |doc|
+            @results[folder.id][:docs].push({"doc_id": doc.id, "doc_title": doc.title, "tally": doc.pg_search_highlight.split('<br>').length})
+            
+          end
+          # @results[folder.id].store("tally", @results[folder.id].docs.each{|doc| doc.tally}.sum)
+        end  
+        
         respond_to do |format|
             format.js
             format.html { redirect_to folders_url }

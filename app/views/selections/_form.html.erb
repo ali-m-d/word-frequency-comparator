@@ -10,12 +10,15 @@
       <div class="modal-body">
         <%= form_for(@selection, :remote => true) do |f| %>
           <div class="field">
+            
             <%= f.label :word, class: "col-12 col-sm-1" %>
-            <%= f.text_field :word, class: "col-12 col-sm-10" %>
-          </div>
-          <div class="actions col-12 col-sm-1">
+            <%= f.text_field :word, class: "col-12 col-sm-9 offset-1" %>
+
+        
+          <div class="actions col-12 col-sm-3">
             <%= f.submit "Proceed to comparison", id: "submitFor#{@selection.id}" %>
           </div>
+  
         <% end %>
       </div> <!-- end of modal body -->
     </div> <!-- end of modal content -->

@@ -1,5 +1,19 @@
 <div>
+    <div class="d-flex flex-row justify-content-end pt-1">
+      <%= link_to "Back to Folders", folders_url, class: "link" %>
+    </div>
     <% if selection.word %>
-        <%= selection.selectees_array.join(',') %>
+        <div class="sub-heading">
+            Results of Comparison
+        </div>
+        <div>
+            <%= @results %>
+            <% @results.map do |folder| %>
+                
+                
+            <% end %>    
+          
+        </div>
+        <br>
     <% end %>
 </div>
