@@ -23,7 +23,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'nokogiri'
 
 gem 'pg_search'
-gem 'activerecord-import'
+gem 'pdf-reader'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

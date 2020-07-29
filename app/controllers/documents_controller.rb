@@ -13,7 +13,7 @@ class DocumentsController < ApplicationController
         # init new doc object
         @document = @folder.documents.new(document_params)
         # generate url compatible with Net::HTTP
-        unless @document.url == ""
+        if @document.url
             escaped = URI.escape("http://boilerpipe-web.appspot.com/extract?url=#{@document.url}&output=text")
             uri = URI.parse(escaped)
             # for manual scraping:
@@ -22,6 +22,8 @@ class DocumentsController < ApplicationController
             # scrape text through boilerpipe api  
             text = Net::HTTP.get(uri).gsub("\n"," ")
             @document.text = text
+        elsif @document.pdf
+            
         end
         
         if @document.save

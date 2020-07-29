@@ -144,24 +144,33 @@ body {
 .panel-footer { background-color: $green; }
 .footer-content { height: 50px; }
 
-// #folderModal form input { font-size: 20x; font-family: 'OpenSans-SemiBold'; }
-
-.modal form input { font-family: 'OpenSans-SemiBold'; }
-.modal form input[type="submit" i] {
+.modal {
+    form input { font-family: 'OpenSans-SemiBold'; }
+    input[type="file"] { display: none; }
+    .modal-body { background-color: $l-blue; }
+    .modal-header { background-color: $d-blue; border-bottom: 0; }
+    button.close { color: $white; }
+}
+#fileup { 
+    padding: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.styled-btn {
     color: $white;
     background-color: $l-blue;
     border-bottom: 2px solid $d-blue;
     border-left: 2px solid $d-blue;
     border-top: 2px solid $blue;
     border-right: 2px solid $blue;
+    &:hover {
+        background-color: $green;
+        cursor: pointer;
+    }
 }
-.modal form input[type="submit" i]:hover { 
-    background-color: $green;
-}
-.modal-body { background-color: $l-blue; }
-.modal-header { background-color: $d-blue; border-bottom: 0; }
-.modal button.close { color: $white; }
-#folderModal form input { }
+
+
 
 
 
