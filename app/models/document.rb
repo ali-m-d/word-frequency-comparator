@@ -1,7 +1,10 @@
 class Document < ApplicationRecord
     include PgSearch
     
+    attr_accessor :url, :pdf
+    
     belongs_to :folder
+    
     
     pg_search_scope :search, 
                     against: :text,

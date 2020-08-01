@@ -168,6 +168,9 @@ body {
         background-color: $green;
         cursor: pointer;
     }
+    &:focus {
+        outline: none;
+    }
 }
 
 

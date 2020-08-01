@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
     require 'nokogiri'
     require 'net/http'
+    require 'open-uri'
     
     before_action :set_folder, only: [:new, :create, :destroy]
 
@@ -10,11 +11,22 @@ class DocumentsController < ApplicationController
     end
 
     def create
-        # init new doc object
-        @document = @folder.documents.new(document_params)
-        # generate url compatible with Net::HTTP
-        if @document.url
-            escaped = URI.escape("http://boilerpipe-web.appspot.com/extract?url=#{@document.url}&output=text")
+        @document = @folder.documents.new(title: params[:document][:title])
+        if params[:document][:pdf]
+            text = ""
+            io = open(params[:document][:pdf])
+            reader = PDF::Reader.new(io)
+            
+            reader.pages.each do |page|
+                text += page.text.gsub("\n", " ")
+            end  
+            
+            @document.text = text
+            @document.save
+        else
+            # generate url compatible with Net::HTTP
+            
+            escaped = URI.escape("http://boilerpipe-web.appspot.com/extract?url=#{params[:document][:url]}&output=text")
             uri = URI.parse(escaped)
             # for manual scraping:
                 # html = Net::HTTP.get(uri)
@@ -22,8 +34,7 @@ class DocumentsController < ApplicationController
             # scrape text through boilerpipe api  
             text = Net::HTTP.get(uri).gsub("\n"," ")
             @document.text = text
-        elsif @document.pdf
-            
+            @document.save
         end
         
         if @document.save
@@ -54,6 +65,6 @@ class DocumentsController < ApplicationController
     end
     
     def document_params
-        params.require(:document).permit(:title, :url)
+        params.require(:document).permit(:title, :url, :pdf)
     end
 end
