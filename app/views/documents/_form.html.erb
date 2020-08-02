@@ -8,23 +8,26 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_for([@folder, @folder.documents.new], :remote => true) do |f| %>
-          <div class="field">
-            <%= f.label :title, class: "col-12 col-sm-1" %>
-            <%= f.text_field :title, class: "col-12 col-sm-8 offset-1" %>
+        <%= form_for([@folder, @folder.documents.new], :remote => true, validate: true) do |f| %>
+          <div class="field" id="title">
+            <%= f.label :title, class: "col-12 col-sm-2 col-lg-1" %>
+            <%= f.text_field :title, class: "col-12 col-sm-8 styled-input" %>
+            <div class="title-errors"></div>
           </div>
-          <div class="field">
-            <%= f.label :url, "URL", class: "col-12 col-sm-1" %>
-            <%= f.text_field :url, class: "col-12 col-sm-8 offset-1" %>
+          <div class="field" id="url">
+            <%= f.label :url, "URL", class: "col-12 col-sm-2 col-lg-1" %>
+            <%= f.text_field :url, class: "col-12 col-sm-8 styled-input" %>
+            <div class="url-errors"></div>
           </div>
-          <div class="field">
-            <%= f.label :pdf, "PDF", class: "col-12 col-sm-2" %>
+          <div class="field" id="pdf">
+            <%= f.label :pdf, "PDF", class: "col-12 col-sm-2 col-lg-1" %>
             <%= f.label :pdf, "Upload File", class: "col-12 col-sm-3 styled-btn" %>
             <%= f.file_field :pdf %>
             <div id="fileup" class="col-12 col-sm-8 offset-2"></div>
+            <div class="pdf-errors">Test text</div>
           </div>
-          <div class="actions col-12 col-sm-1">
-            <%= f.submit "Add document", id: "submitFor#{ @folder.id}", class: "styled-btn" %>
+          <div class="actions col-12 col-sm-3 col-lg-3">
+            <%= f.submit "Add document", id: "submitFor#{ @folder.id}", class: "styled-btn", data: {disable_with: "Adding..."} %>
           </div>
         <% end %>
       </div> <!-- end of modal body -->

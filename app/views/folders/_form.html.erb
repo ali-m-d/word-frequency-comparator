@@ -8,28 +8,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_with(model: folder) do |form| %>
-          <% if folder.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
-              <ul>
-                <% folder.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-        
-          <div class="field">
-            <%= form.label :name, class: "col-12 col-sm-2" %>
-            <%= form.text_field :name, placeholder: "", class: "text-field col-12 col-sm-8" %>
+        <%= form_with(model: folder, id: "newFolderForm") do |form| %>
+          <div class="field" id="name">
+            <%= form.label :name, class: "col-12 col-sm-2 col-lg-1" %>
+            <%= form.text_field :name, class: "col-12 col-sm-9 col-lg-10 styled-input" %>
           </div>
-        
-          <div class="actions">
-            <%= form.submit nil, class: "col-12 col-sm-4 styled-btn" %>
+          <div class="actions col-12 col-sm-3 col-lg-1">
+            <%= form.submit nil, class: "styled-btn" %>
           </div>
         <% end %>
-        </div> <!-- end of modal body -->
+      </div> <!-- end of modal body -->
     </div> <!-- end of modal content -->
   </div> <!-- end of dialog -->
 </div> <!-- end of modal -->

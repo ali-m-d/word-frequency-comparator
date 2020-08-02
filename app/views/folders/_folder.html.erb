@@ -16,24 +16,37 @@
             </div>
         </div>
     </div>
-    <div class="col-1 addDoc link">
-        <%= link_to new_folder_document_path(folder), remote:true, id: "documentButton" do %>
+    <div class="col-1 folder-icons link">
+        <div>
+        <%= link_to new_folder_document_path(folder), remote:true, id: "documentButton", class: "link pr-1" do %>
             <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-file-earmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 1H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5v-1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h5v2.5A1.5 1.5 0 0 0 10.5 6H13v2h1V6L9 1z"/>
                 <path fill-rule="evenodd" d="M13.5 10a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"/>
                 <path fill-rule="evenodd" d="M13 12.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
             </svg>
         <% end %>
+        </div>
+        <div>
+        <%= link_to folder, method: :delete, data: { remote:true }, id: "#{folder.id}", class: "delete link" do %>
+            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path 
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                />
+                <path
+                    fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                />
+            </svg>
+        <% end %>
+        </div>
     </div>
+    
     <div id="collapse<%= folder.id %>" class="collapse col-10 offset-1" aria-labelledby="heading<%= folder.id %>" data-parent="#accordion">
         <div class="card-body">
             <div id="folderDocs<%= folder.id %>">
                 <% if folder.documents.any? %>
                     <%= render folder.documents %>
                 <% end %>
-            </div>
-            <div class="d-flex">
-                <%= link_to 'Delete Folder', folder, method: :delete, data: { remote:true }, id: "#{folder.id}", class: "delete ml-auto link" %>
             </div>
         </div>
     </div>

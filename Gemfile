@@ -24,9 +24,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'pg_search'
 gem 'pdf-reader'
-gem 'cloudinary'
 gem 'rack-cors'
-gem 'carrierwave'
+gem 'active_storage_validations'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
