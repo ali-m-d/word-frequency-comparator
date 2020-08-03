@@ -6,15 +6,16 @@
         <div class="sub-heading">
             Results of Comparison
         </div>
-        <div>
+        <p>
             <% selection.selectees_json.each do |selectee|  %>
-                <p>
                     The word "<%= selection.word %>" appears a total of
                     <%= pluralize(selectee["tally"], 'time') %> in the documents
-                    contained in "<%= selectee["name"] %>"
-                </p>
+                    contained in "<%= selectee["name"] %>"<br>
             <% end %>
-        </div>
-        <br>
+        </p>
+        
+        <% selection.selectees_json.each do |selectee| %>
+            <%= selectee["name"] %> 
+        <% end %>
     <% end %>
 </div>

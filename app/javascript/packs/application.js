@@ -15,13 +15,10 @@ import '@fortawesome/fontawesome-free/css/all';
 window.$ = window.JQuery = JQuery;
 var selectees = [];
 
-
-
 $(document).ready(function () {
-    setTimeout(function() {
+    $(document).click(function() {
         $('.alert-text').fadeOut();
-    }, 4000);
-    
+    });
     
     $('body').on('change', '#document_pdf', function(e) {
         console.log(e.target.value.replace('C:\\fakepath\\', ""));
