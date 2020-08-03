@@ -11,7 +11,14 @@ class DocumentsController < ApplicationController
     end
 
     def create
-        @document = @folder.documents.create(document_params)
+        
+        @document = @folder.documents.new(document_params)
+        
+        if params[:document][:pdf]
+            @document.content_type = params[:document][:pdf].content_type            
+        end
+
+        @document.save
         
         respond_to do |format|
             if @document.save

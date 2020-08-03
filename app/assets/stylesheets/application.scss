@@ -180,6 +180,7 @@ body {
     border-right: 2px solid $blue;
     padding-top: 1px;
     padding-bottom: 1px;
+    text-align: center;
     &:hover {
         background-color: $green;
         cursor: pointer;
@@ -189,6 +190,7 @@ body {
         background-color: $d-blue;
     }
 }
+.submit { width: 100%; }
 .errors {
     font-family: 'OpenSans-Regular';
     font-size: .8em;

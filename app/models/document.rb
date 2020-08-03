@@ -1,14 +1,19 @@
 class Document < ApplicationRecord
     include PgSearch::Model
-    has_one_attached :pdf
+    
+    attr_accessor :content_type
     
     belongs_to :folder
     validates :title, presence: true
     validate :url_or_pdf
-    
+    validate :content_type_pdf
     
     def url_or_pdf
-       errors.add(:url, "Either URL or PDF must be provided") unless url.present? || pdf.present? 
+       errors.add(:url, "either URL or PDF must be provided") unless url.present? || pdf.present? 
+    end
+    
+    def content_type_pdf
+       errors.add(:pdf, "local file must be in PDF format") if content_type != "application/pdf" && pdf.present?
     end
     
     # validates :pdf, presence: true, unless: :url
