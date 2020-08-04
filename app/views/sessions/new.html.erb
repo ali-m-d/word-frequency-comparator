@@ -1,13 +1,20 @@
-
-<div class="login-page">
-    <div class="form">
+<div class="container">
+    <div class="form col-8 mx-auto my-5">
         <%= form_for(:user, url: sessions_path) do |f| %> 
             <form class="login-form" autocomplete="off">
-                <input autocomplete="off" type="text" name="user[username]" id="user_username" placeholder="username">
-                <input type="password" name="user[password]" id="user_password" placeholder="password">
-                <p/>
-                <input type="submit" class="button" value="Login">
-                <p class="message">Not registered? <%= link_to "Create an account", new_user_path %></p>
+                <div class="field row">
+                    <label for="user_username" class="col-12 col-sm-3 col-lg-2">Username</label>
+                    <input autocomplete="off" type="text" class="styled-input col-12 col-sm-8 col-lg-9" name="user[username]" id="user_username" placeholder="username">
+                </div>
+                <div class="field row">
+                    <label for="user_password" class="col-12 col-sm-3 col-lg-2">Password</label>
+                    <input autocomplete="off" type="password" class="styled-input col-12 col-sm-8 col-lg-9" name="user[password]" id="user_password" placeholder="password">
+                </div>
+                <div class="actions row">
+                    <input type="submit" class="col-12 col-sm-4 col-lg-2 offset-sm-7 offset-lg-9 styled-btn my-2" value="Login">
+                    
+                        <%= link_to "Register", new_user_path, class: "col-12 col-sm-4 col-lg-2 offset-sm-7 offset-lg-9 styled-btn" %>
+                </div>
             </form>
         <% end %>
     </div>
