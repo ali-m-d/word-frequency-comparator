@@ -12,8 +12,8 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @font-face {font-family: 'OpenSans-Regular'; src: font-url("OpenSans-Regular.ttf") format('truetype')}
 @font-face {font-family: 'OpenSans-SemiBold'; src: font-url("OpenSans-SemiBold.ttf") format('truetype')}
 @font-face {font-family: 'OpenSans-Bold'; src: font-url("OpenSans-Bold.ttf") format('truetype')}
-$d-blue: #004c8c; $blue: #0277bc; $l-blue: #427ab3;
-// $l-blue: #58a5f0;
+$d-blue: #004c8c; $blue: #0277bc; $l-blue: #58a5f0;
+// $l-blue: #427ab3; 
 $green: #00e676; $d-green: #00b248;
 $yellow: #FFF842; $white: #ffffff; $red: #ff7043;
 .d-blue { color: $d-blue; } .green { color: $green; } .white { color: $white; }
@@ -144,6 +144,7 @@ body {
 
 .styled-input {
     font-family: 'OpenSans-SemiBold';
+    border: none;
     &:focus {
         outline: none;
     }
@@ -168,22 +169,24 @@ body {
     text-overflow: ellipsis;
 }
 .styled-btn {
+    border: 2px solid $white;
     color: $white;
     background-color: $l-blue;
-    border-bottom: 2px solid $d-blue;
-    border-left: 2px solid $d-blue;
-    border-top: 2px solid $blue;
-    border-right: 2px solid $blue;
     padding-top: 1px;
     padding-bottom: 1px;
     text-align: center;
+    text-decoration: none;
     &:hover {
-        background-color: $green;
         cursor: pointer;
+        text-decoration: none;
+        background-color: $d-blue
     }
     &:active {
         outline: none;
-        background-color: $d-blue;
+        background-color: $green;
+    }
+    &:focus {
+        outline: none;
     }
 }
 .submit { width: 100%; }
@@ -193,8 +196,7 @@ body {
 }
 .form {
     background-color: $l-blue;
-    box-shadow: 4px 4px 6px 0px rgba(0,0,0,0.75);
-    padding: 20px;
+    padding: 30px 30px 30px 35px;
 }
 
 

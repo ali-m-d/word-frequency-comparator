@@ -11,9 +11,8 @@
                     <input autocomplete="off" type="password" class="styled-input col-12 col-sm-8 col-lg-9" name="user[password]" id="user_password" placeholder="password">
                 </div>
                 <div class="actions row">
-                    <input type="submit" class="col-12 col-sm-4 col-lg-2 offset-sm-7 offset-lg-9 styled-btn my-2" value="Login">
-                    
-                        <%= link_to "Register", new_user_path, class: "col-12 col-sm-4 col-lg-2 offset-sm-7 offset-lg-9 styled-btn" %>
+                    <input type="submit" class="col-12 col-sm-3 col-lg-1 offset-sm-8 offset-lg-10 styled-btn my-2" value="Log In"> 
+                    <input type="button" class="col-12 col-sm-3 col-lg-1 offset-sm-8 offset-lg-10 styled-btn" value="Register" onclick="location.href='<%= new_user_path %>'">
                 </div>
             </form>
         <% end %>
