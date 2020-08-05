@@ -16,6 +16,7 @@ window.$ = window.JQuery = JQuery;
 var selectees = [];
 
 $(document).ready(function () {
+    
     $(document).click(function() {
         $('.alert-text').fadeOut();
     });

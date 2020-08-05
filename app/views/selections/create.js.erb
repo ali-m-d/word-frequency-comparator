@@ -1,5 +1,5 @@
 $('#selectionModal').modal('hide');
-$('#selection').append("<%= j render @selection %>")
+$('#selection').html("<%= j render @selection %>")
 $('#accordion').hide();
 $('.alert-text').text("Comparison completed successfully");
 $('.alert-text').fadeIn();

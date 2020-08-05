@@ -8,17 +8,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= form_for(@selection, :remote => true) do |f| %>
-          <div class="field">
-            
-            <%= f.label :word, class: "col-12 col-sm-1" %>
-            <%= f.text_field :word, class: "col-12 col-sm-9 offset-1" %>
-
-        
-          <div class="actions col-12 col-sm-3">
-            <%= f.submit "Proceed to comparison", id: "submitFor#{@selection.id}", class: "styled-btn" %>
+        <%= form_for(@selection, :remote => true, autocomplete: "off") do |f| %>
+          <div class="d-flex flex-sm-row flex-column">
+            <%= f.label :word, class: "my-0", style: "width: 3rem;" %>
+            <%= f.text_field :word, class: "styled-input flex-grow-1" %>
           </div>
-  
+          <div class="d-flex flex-row justify-content-end">
+            <%= f.submit "Proceed to comparison", id: "submitFor#{@selection.id}", class: "styled-btn mt-2", style: "width: 12rem;" %>
+          </div>
         <% end %>
       </div> <!-- end of modal body -->
     </div> <!-- end of modal content -->

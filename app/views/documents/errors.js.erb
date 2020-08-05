@@ -1,3 +1,3 @@
-$('.title-errors').html("<div class='col-10 offset-lg-1 offset-sm-2 errors'><%= j @document.errors[:title].join('<br>') %></div>")
-$('.url-errors').html("<div class='col-10 offset-lg-1 offset-sm-2 errors'><%= j @document.errors[:url].join('<br>') %></div>")
-$('.pdf-errors').html("<div class='col-10 offset-lg-1 offset-sm-2 errors'><%= j @document.errors[:pdf].join('<br>') %></div>")
+$('.title-errors').html("<%= j @document.errors[:title].join('<br>') %>")
+$('.url-errors').html("<%= j @document.errors[:url].join('<br>') %>")
+$('.pdf-errors').html("<%= j @document.errors[:pdf].join('<br>') %>")

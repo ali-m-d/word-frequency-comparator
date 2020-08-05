@@ -2,20 +2,72 @@
     <div class="d-flex flex-row justify-content-end pt-1">
       <%= link_to "Back to Folders", folders_url, class: "link" %>
     </div>
-    <% if selection.word %>
-        <div class="sub-heading">
-            Results of Comparison
+    
+    <div class="sub-heading">
+        Results of Comparison for "<%= selection.word %>"
+    </div>
+    
+    <div class="d-flex justify-content-between flex-wrap" style="width: 100%;">
+    <% selection.selectees_json.each do |selectee| %>
+        <div class="d-flex flex-column">
+            <div class="overflow-hidden" style="width: 20rem;"><%= selectee["name"] %></div>
+            <div class="mb-1" style="font-size: .8em">Average frequency: <%= selectee["tally"] %></div>
+            <div id="chart_<%= selectee["folder_id"] %>" style="width: 20rem; height: 20rem;"></div>
+            <div class="d-flex flex-row justify-content-end mt-1" style="width: 20rem">
+                <a class="link" data-toggle="modal" data-target="#modal_<%= selectee["folder_id"] %>">
+                    View Highlights
+                </a>
+            </div>
         </div>
-        <p>
-            <% selection.selectees_json.each do |selectee|  %>
-                    The word "<%= selection.word %>" appears a total of
-                    <%= pluralize(selectee["tally"], 'time') %> in the documents
-                    contained in "<%= selectee["name"] %>"<br>
-            <% end %>
-        </p>
+    <% end %>
+    </div>
+    
+    <script type="text/javascript">
+    
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawCharts);
         
-        <% selection.selectees_json.each do |selectee| %>
-            <%= selectee["name"] %> 
-        <% end %>
+        function drawCharts() {
+            <% selection.selectees_json.each do |selectee| %>
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Documents');
+                data.addColumn('number', 'Frequency');
+                <% selectee["docs"].each do |doc| %>
+                    data.addRows([
+                        ['<%= doc["title"] %>', <%= doc["tally"] %>]
+                    ]);
+                    var options = {
+                     'title': '<%= selectee["name"] %>'
+                    };
+                
+                    var chart = new google.visualization.ColumnChart(document.getElementById('chart_<%= selectee["folder_id"] %>'));
+                    chart.draw(data, options);
+                <% end %>
+            <% end %>
+        }
+        
+    </script>
+        
+    <% selection.selectees_json.each do |selectee| %>
+        <div id="modal_<%= selectee["folder_id"] %>" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg" role="content">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><%= selectee["name"] %></h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <% selectee["docs"].each do |doc| %>
+                            <%= doc["title"] %>
+                            <p>
+                                <%= doc["highlights"].html_safe %>
+                            </p>
+                        <% end %>
+                    </div> <!-- end of modal body -->
+                </div> <!-- end of modal content -->
+            </div> <!-- end of dialog -->
+        </div> <!-- end of modal -->
     <% end %>
 </div>

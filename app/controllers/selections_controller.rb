@@ -42,7 +42,7 @@ class SelectionsController < ApplicationController
           folder = Folder.find(selectee)
           folder_hash = {folder_id: folder.id, "name": folder.name, "docs": []}
           folder.documents.search(@selection.word).with_pg_search_highlight.each do |doc|
-            folder_hash[:docs].push({"doc_id": doc.id, "doc_title": doc.title, "highlights": doc.pg_search_highlight, "tally": doc.pg_search_highlight.split('<br>').length})
+            folder_hash[:docs].push({"doc_id": doc.id, "title": doc.title, "highlights": doc.pg_search_highlight, "tally": doc.pg_search_highlight.split('<br>').length})
           end
           folder_tally = folder_hash[:docs].map{|doc| doc[:tally]}.sum
           folder_hash.store("tally", folder_tally)
