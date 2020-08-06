@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>WordFrequencyComparator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <link rel="icon" href="<%= asset_path("doc.png") %>">
@@ -11,53 +12,72 @@
 </head>
 
 <body>
-<nav class="navbar navbar-light">
-  <div class="container" style="position: relative;">
-  <span class="d-none d-md-block login-strip" style="width: 100%;" >
-    <% if logged_in? %>
-      <span class="green">Logged in as </span><span class="white"><%= current_user.username %></span>
-    <% end %>
-  </span>
-    <a class="navbar-brand" href="#">
-      <img src="<%= asset_path("doc.png") %>" height="40" width="40" class="align-top"><span class="main-heading">
-        <span class="green">Word</span><span class="white">Frequency</span><span class="green">Comparator</span>
-      </span>
-    </a>
-    <ul class="navbar-nav ml-auto login">
-    </ul>
+<header>
+  <div class="header">
+    <div class="container">
+      
+      <div class="d-flex flex-row justify-content-between">
+        <a href="#" class="pb-3 pt-3">
+          <div class="d-flex flex-row align-items-center">
+            <div>
+              <img src="<%= asset_path("doc.png") %>" height="40" width="40" class="align-top">
+            </div>
+            <div class="main-heading px-1 flex-sm-column">
+              <div>
+                <span class="green">Word</span><span class="white">Frequency</span><span class="green">Comparator</span>
+              </div>
+            </div>
+          </div>
+        </a>
+        <div class="login d-flex flex-row pt-2">
+          <% if logged_in? %>
+              <div class="d-none d-sm-block">
+                <span class="green">Logged in as </span><span class="white"><%= current_user.username %></span>
+              </div>
+              <div class="d-none d-sm-block">
+                <%= link_to "Logout", logout_path, method: :delete, class: "logout-btn ml-1" %> 
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
+</header>
    
-<div class="alert" height="20">
+<div class="alert">
   <div class="container">
-    <span class="alert-text">
+    <div class="d-flex flex-row">
+    <div class="alert-text">
       <% if flash.any? %>
-        <% flash.each do |type,msg| %>
+        <% flash.each do |msg| %>
           <%= msg %>
         <% end %>
       <% end %>
-    </span>
+    </div>
+    <div class="d-block d-sm-none ml-auto">
+      <%= link_to "Logout", logout_path, method: :delete, class: "logout-btn" %> 
+    </div>
+    </div>
   </div>
 </div>
 
-<nav id="menu" class="navbar navbar-light menu">
+<nav class="navbar navbar-light py-0 menu">
   <div class="container menu-bar">
     <% if logged_in? %>
-    <ul class="navbar-nav flex-row">
+    <ul class="navbar-nav flex-row mx-auto">
       <li>
-        <div class="nav-item menu-item">
-          <%= link_to 'New Folder', new_folder_path, remote: true, id: "folderButton", class: "nav-link" %>
-        </div>
+        <%= link_to new_folder_path, remote: true, id: "folderButton" do %>
+          <div class="text-center px-3 py-2 py-sm-3">
+            New Folder
+          </div>
+        <% end %>
       </li>
       <li>
-        <div class="nav-item menu-item">
-          <%= link_to 'Compare', new_selection_path, remote: true, id: "compareBtn", class: "nav-link" %>
-        </div>
-      </li>
-      <li class="nav-item">
-        <div class="nav-item menu-item">
-          <%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %>
-        </div>
+        <%= link_to new_selection_path, remote: true, id: "compareBtn" do %>
+          <div class="nav-item text-center px-3 py-2 py-sm-3">
+            New Comparison 
+          </div>
+        <% end %>
       </li>
     </ul>
     <% end %>

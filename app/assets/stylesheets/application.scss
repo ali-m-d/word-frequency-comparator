@@ -32,37 +32,51 @@ body {
     }
 }
 
-.main-heading { font-size: 1.3em; }
+.main-heading { font-size: 1.4em;
+    word-wrap: break-word; 
+}
+@media (max-width: 479px) {
+    .main-heading { font-size: 5.5vw; }
+}
 .alert { 
     background-color: $blue;
     padding: 2px;
-    height: 30px; 
+    min-height: 30px; 
     border-radius: 0; 
     margin: 0; 
-    span { padding-left: 2px; }
 }
 
-.login-strip { position: absolute; right: 0; top: 0; z-index: 1; text-align: right; padding-top: 8px; font-size: 12px; }
+.login { 
+    font-size: 12px;
+}
 
-.navbar { 
+.header { 
     background-color: $d-blue;
-    padding-top: 0;
-    padding-bottom: 0; 
-    a {
-      padding-top: 10px; padding-bottom: 10px;  
-    }
-    .navbar-brand:hover { background-color: inherit; }
-    .login-strip { padding-right: 14px; }
 }
 
-#menu { background-color: $l-blue; padding: 0; text-align: center; }
-#menu li { text-align: center; border-bottom: 4px solid $l-blue;}
-#menu li:hover { border-bottom: 4px solid $green; }
-#menu .menu-item { text-align: center; padding: 4px 18px 4px 18px; }
-
-#menu a { text-transform: uppercase; color: $white; opacity: 1; font-family: 'OpenSans-SemiBold'; }
-#menu li:nth-child(1) { margin-left: -17px; }
-#menu a:hover { background-color: $l-blue; } 
+.menu { 
+    background-color: $l-blue; 
+    li {
+        text-align: center; border-bottom: 4px solid $l-blue;
+        &:hover {
+            border-bottom: 4px solid $green; 
+        }
+    }
+    a {
+        text-transform: uppercase; 
+        color: $white; 
+        opacity: 1; 
+        font-family: 'OpenSans-SemiBold';
+        &:hover {
+            background-color: $l-blue;
+            text-decoration: none;
+        }
+    }
+    .menu-item {
+        text-align: center;
+        padding: 12px 0; 
+    }
+}
 
 .sub-heading { font-size: 1.5em; margin-top: 15px; margin-bottom: 10px; }
 
@@ -96,6 +110,11 @@ body {
         &:hover {
             filter: drop-shadow(4px 4px 3px rgba(0,0,0,0.9));  
         }
+    }
+    .folder-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 .link { 
@@ -214,6 +233,30 @@ body {
         cursor: pointer;
         text-decoration: none;
         background-color: $d-blue
+    }
+    &:active {
+        outline: none;
+        background-color: $green;
+    }
+    &:focus {
+        outline: none;
+    }
+    &:visited {
+        color: $white;
+    }
+}
+.logout-btn {
+    font-size: 12px;
+    border: 2px solid $white;
+    color: $white;
+    background-color: $d-blue;
+    padding: 1px 2px;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        background-color: $l-blue
     }
     &:active {
         outline: none;

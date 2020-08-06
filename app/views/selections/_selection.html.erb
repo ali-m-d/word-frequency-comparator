@@ -10,10 +10,10 @@
     <div class="d-flex justify-content-between flex-wrap" style="width: 100%;">
     <% selection.selectees_json.each do |selectee| %>
         <div class="d-flex flex-column">
-            <div class="overflow-hidden" style="width: 20rem;"><%= selectee["name"] %></div>
+            <div class="overflow-hidden"><%= selectee["name"] %></div>
             <div class="mb-1" style="font-size: .8em">Average frequency: <%= selectee["tally"] %></div>
-            <div id="chart_<%= selectee["folder_id"] %>" style="width: 20rem; height: 20rem;"></div>
-            <div class="d-flex flex-row justify-content-end mt-1" style="width: 20rem">
+            <div id="chart_<%= selectee["folder_id"] %>" style="width: 300px; 300px;"></div>
+            <div class="d-flex flex-row justify-content-end mt-1">
                 <a class="link" data-toggle="modal" data-target="#modal_<%= selectee["folder_id"] %>">
                     View Highlights
                 </a>
