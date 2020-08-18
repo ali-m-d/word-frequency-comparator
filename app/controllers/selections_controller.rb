@@ -24,6 +24,7 @@ class SelectionsController < ApplicationController
   # POST /selections
   # POST /selections.json
   def create
+    
     if params[:selectees_array]
       @selection = Selection.new(user: current_user)
       JSON.parse(params[:selectees_array]).each do |selectee|
@@ -39,6 +40,7 @@ class SelectionsController < ApplicationController
       
       if @selection.save
         @selection.selectees.each do |selectee|
+         
           folder = Folder.find(selectee)
           folder_hash = {folder_id: folder.id, "name": folder.name, "docs": []}
           folder.documents.search(@selection.word).with_pg_search_highlight.each do |doc|
@@ -46,6 +48,7 @@ class SelectionsController < ApplicationController
           end
           folder_tally = folder_hash[:docs].map{|doc| doc[:tally]}.sum
           folder_hash.store("tally", folder_tally)
+          folder_hash.store("average", folder_tally.to_f / folder.documents.count)
           @selection.selectees_json.push(folder_hash)
         end
         

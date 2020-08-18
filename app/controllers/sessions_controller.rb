@@ -10,11 +10,6 @@ class SessionsController < ApplicationController
     if user && user.authenticate(password)
       session[:user_id] = user.id
       redirect_to root_path, alert: "Logged in successfully"
-      # respond_to do |format|
-      #     format.js
-      #     format.html { redirect_to root_path }
-      #     format.json { head :no_content }
-      # end
     else
       redirect_to login_path, alert: "Invalid username/password combination"
     end

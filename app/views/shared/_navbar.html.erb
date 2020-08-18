@@ -1,0 +1,22 @@
+<nav class="navbar navbar-light py-0 menu">
+  <div class="container">
+    <% if logged_in? %>
+    <ul class="navbar-nav flex-row mx-auto">
+      <li class="menu-item">
+        <%= link_to new_folder_path, remote: true, id: "folderButton", class: "menu-link" do %>
+          <div class="text-center px-3 py-2 py-sm-3">
+            New Folder
+          </div>
+        <% end %>
+      </li>
+      <li class="menu-item">
+        <%= link_to new_selection_path, remote: true, id: "compareBtn", class: "menu-link" do %>
+          <div class="nav-item text-center px-3 py-2 py-sm-3">
+            New Comparison 
+          </div>
+        <% end %>
+      </li>
+    </ul>
+    <% end %>
+  </div>
+</nav>

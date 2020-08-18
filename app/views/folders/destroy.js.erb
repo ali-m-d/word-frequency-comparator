@@ -1,5 +1,6 @@
-$('.delete').bind('ajax:success', function() {
+$('.delete-folder').bind('ajax:success', function() {
     var folderId = '#' + $(this).attr("id")
+    console.log("folder to be deleted: " + folderId);
     $(folderId).fadeOut(500, function() {
         $(this).remove();
     });

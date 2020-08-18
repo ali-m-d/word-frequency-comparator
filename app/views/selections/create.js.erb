@@ -1,5 +1,4 @@
 $('#selectionModal').modal('hide');
 $('#selection').html("<%= j render @selection %>")
-$('#accordion').hide();
 $('.alert-text').text("Comparison completed successfully");
-$('.alert-text').fadeIn();
+$('html, body').animate({scrollTop: $('#selection').offset().top}, 2000);

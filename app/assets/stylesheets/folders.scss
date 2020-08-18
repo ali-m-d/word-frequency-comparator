@@ -1,0 +1,102 @@
+@import 'colors';
+
+.folder-bar {
+    .card {
+        border-radius: 0; 
+        border: 0;  
+        margin-bottom: 5px;
+        padding: 0;
+    }
+    
+    .folder-card {
+       .card-header {
+            border-radius: 0; 
+            padding: 10px;
+            svg {
+                margin-left: 2px;
+                margin-right: 8px;
+            }
+            &:hover {
+                background-color: $green; 
+                box-shadow: 4px 4px 6px 0px rgba(0,0,0,0.75);
+                svg {
+                    fill: $white;
+                }
+            }
+            .folder-name {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+       }
+    
+    
+    }
+}
+.folder .card-body {
+    padding-right: 3rem;
+}
+#accordion .folder:nth-child(odd) {
+    .card-header {
+        background-color: $l-blue;
+    }
+}
+#accordion .folder:nth-child(even) {
+    .card-header {
+        background-color: $blue;
+    }
+}
+
+.folder-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-folder {
+    &:hover {
+        filter: drop-shadow(3px 3px 3px rgba(0,0,0,.8));
+    }
+    
+    text-transform: uppercase; 
+    color: $white;
+    opacity: 1; 
+    font-size: .9em; 
+    margin-top: 0;
+    svg {
+        margin-top: -4px;
+        color: $white;
+    }
+}
+
+.add-doc {
+    &:hover {
+        filter: drop-shadow(3px 3px 3px rgba(0,0,0,.8));
+    }
+    
+    text-transform: uppercase; 
+    color: $white;
+    opacity: 1; 
+    font-size: .9em; 
+    margin-top: 0;
+    svg {
+        margin-top: -4px;
+        color: $white;
+    }
+}
+
+.delete-doc {
+    margin-top: -2px;
+    svg {
+        fill: $white;
+    }
+    &:hover {
+        filter: drop-shadow(3px 3px 3px rgba(0,0,0,.8));
+    }
+}
+
+.document span {
+    font-family: 'OpenSans-Regular';
+    line-height: 1.1rem;
+}

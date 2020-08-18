@@ -1,0 +1,111 @@
+@import 'colors';
+
+.styled-checkbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: -5px;
+    align-items: center;
+    padding-right: 5px;
+    > span {
+        color: #34495E;
+        padding: 0.5rem 0.25rem;
+    }
+    > input {
+        height: 23px; width: 23px;
+        appearance: none;
+        border: 2px solid $white;
+        border-radius: 4px;
+        outline: none;
+        transition-duration: 0.5s;
+        background-color: $l-blue;
+        cursor: pointer;
+        position: relative;
+    }
+    > input:checked {
+        border: 2px solid $green;
+        background-color: $blue;
+        display: block;
+        text-align: center;
+        color: $white;
+    }
+    > input:checked::before {
+        content: '\2713';
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        position: absolute;
+        top: -0.3rem;
+        margin-left: 2px;
+    }
+    > input:active {
+        border: 2px solid $white;
+    }
+}
+
+.styled-input {
+    border-style: hidden;
+    outline: none;
+    padding-left: 6px;
+    
+    &:focus {
+        outline: 1px solid black;
+    }
+}
+.modal {
+    input[type="file"] { display: none; }
+    input[type="submit"] {margin-left: 0px; }
+    .modal-body { background-color: $l-blue; }
+    .modal-header { background-color: $d-blue; border-bottom: 0; }
+    button.close { 
+        color: $white; 
+        &:focus {
+            outline: none;
+        }
+    }
+    
+}
+
+#fileup { 
+    padding-left: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.submit { width: 100%; }
+
+.errors {
+    font-family: 'OpenSans-Regular';
+    font-size: .8em;
+}
+
+.form {
+    background-color: $l-blue;
+    padding: 30px;
+}
+
+.styled-btn {
+    border: 2px solid $white;
+    color: $white;
+    background-color: $l-blue;
+    padding: 1px;
+    width: 8rem;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        background-color: $d-blue
+    }
+    &:active {
+        outline: none;
+        background-color: $green;
+    }
+    &:focus {
+        outline: none;
+    }
+    &:visited {
+        color: $white;
+    }
+}

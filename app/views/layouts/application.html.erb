@@ -1,94 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>WordFrequencyComparator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <link rel="icon" href="<%= asset_path("doc.png") %>">
-  <%= stylesheet_link_tag 'application', media: 'all' %>
-  <%= javascript_pack_tag 'application' %>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-</head>
-
-<body>
-<header>
-  <div class="header">
-    <div class="container">
-      
-      <div class="d-flex flex-row justify-content-between">
-        <a href="#" class="pb-3 pt-3">
-          <div class="d-flex flex-row align-items-center">
-            <div>
-              <img src="<%= asset_path("doc.png") %>" height="40" width="40" class="align-top">
-            </div>
-            <div class="main-heading px-1 flex-sm-column">
-              <div>
-                <span class="green">Word</span><span class="white">Frequency</span><span class="green">Comparator</span>
-              </div>
-            </div>
-          </div>
-        </a>
-        <div class="login d-flex flex-row pt-2">
-          <% if logged_in? %>
-              <div class="d-none d-sm-block">
-                <span class="green">Logged in as </span><span class="white"><%= current_user.username %></span>
-              </div>
-              <div class="d-none d-sm-block">
-                <%= link_to "Logout", logout_path, method: :delete, class: "logout-btn ml-1" %> 
-              </div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-   
-<div class="alert">
-  <div class="container">
-    <div class="d-flex flex-row">
-    <div class="alert-text">
-      <% if flash.any? %>
-        <% flash.each do |msg| %>
-          <%= msg %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="d-block d-sm-none ml-auto">
-      <%= link_to "Logout", logout_path, method: :delete, class: "logout-btn" %> 
-    </div>
-    </div>
-  </div>
-</div>
-
-<nav class="navbar navbar-light py-0 menu">
-  <div class="container menu-bar">
-    <% if logged_in? %>
-    <ul class="navbar-nav flex-row mx-auto">
-      <li>
-        <%= link_to new_folder_path, remote: true, id: "folderButton" do %>
-          <div class="text-center px-3 py-2 py-sm-3">
-            New Folder
-          </div>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to new_selection_path, remote: true, id: "compareBtn" do %>
-          <div class="nav-item text-center px-3 py-2 py-sm-3">
-            New Comparison 
-          </div>
-        <% end %>
-      </li>
-    </ul>
-    <% end %>
-  </div>
-</nav>
-
-</header>
-
-<%= yield %>
-<footer class="panel-footer">
   
-</footer>
-</body>
+  <%= render 'shared/head' %>
+  
+  <body>
+
+    <%= render 'shared/header' %>
+    <%= render 'shared/alert' %>
+    <%= render 'shared/navbar' %>
+
+    <%= yield %>
+    
+  </body>
 </html>

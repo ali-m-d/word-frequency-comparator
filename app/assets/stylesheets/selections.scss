@@ -1,0 +1,51 @@
+@import 'colors';
+
+.highlights {
+    line-height: 1.2em;
+}
+
+.selectees {
+    display: grid;
+    row-gap: 5px;
+}
+.selectee {
+    justify-self: center;
+}
+
+@media screen and (min-width: 992px) {
+    .selectees {
+        grid-template-columns: 1fr 1fr;
+    }
+    .chart {
+        width: 25rem;
+        height: 25rem;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .selectees {
+        grid-template-columns: 1fr;
+    }
+    .chart {
+        width: 20rem;
+        height: 20rem;
+    }
+}
+
+@media screen and (min-width: 577px) and (max-width: 767px) {
+    .selectees {
+        grid-template-columns: 1fr;
+    }
+    .chart {
+        width: 60vw;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .selectees {
+        grid-template-columns: 1fr;
+    }
+    .chart {
+        width: 80vw;
+    }
+}

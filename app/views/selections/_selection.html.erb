@@ -1,25 +1,21 @@
 <div>
-    <div class="d-flex flex-row justify-content-end pt-1">
-      <%= link_to "Back to Folders", folders_url, class: "link" %>
-    </div>
-    
     <div class="sub-heading">
         Results of Comparison for "<%= selection.word %>"
     </div>
     
-    <div class="d-flex justify-content-between flex-wrap" style="width: 100%;">
-    <% selection.selectees_json.each do |selectee| %>
-        <div class="d-flex flex-column">
-            <div class="overflow-hidden"><%= selectee["name"] %></div>
-            <div class="mb-1" style="font-size: .8em">Average frequency: <%= selectee["tally"] %></div>
-            <div id="chart_<%= selectee["folder_id"] %>" style="width: 300px; 300px;"></div>
-            <div class="d-flex flex-row justify-content-end mt-1">
-                <a class="link" data-toggle="modal" data-target="#modal_<%= selectee["folder_id"] %>">
-                    View Highlights
-                </a>
+    <div class="selectees">
+        <% selection.selectees_json.each do |selectee| %>
+            <div class="selectee d-flex flex-column align-items-stretch">
+                <div class="overflow-hidden flex-1"><%= selectee["name"] %></div>
+                <div class="mb-1 flex-1">Average frequency: <%= selectee["average"] %></div>
+                <div id="chart_<%= selectee["folder_id"] %>" class="chart"></div>
+                <div class="d-flex flex-row justify-content-end mt-1">
+                    <a class="link" data-toggle="modal" data-target="#modal_<%= selectee["folder_id"] %>">
+                        View Highlights
+                    </a>
+                </div>
             </div>
-        </div>
-    <% end %>
+        <% end %>
     </div>
     
     <script type="text/javascript">
@@ -32,7 +28,7 @@
                 var data = new google.visualization.DataTable();
                 data.addColumn('string', 'Documents');
                 data.addColumn('number', 'Frequency');
-                <% selectee["docs"].each do |doc| %>
+                <% selectee["docs"].sort_by{|doc| doc["tally"]}.each do |doc| %>
                     data.addRows([
                         ['<%= doc["title"] %>', <%= doc["tally"] %>]
                     ]);
@@ -59,12 +55,14 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <% selectee["docs"].each do |doc| %>
-                            <%= doc["title"] %>
-                            <p>
-                                <%= doc["highlights"].html_safe %>
-                            </p>
-                        <% end %>
+                        <div class="mb-2 highlights">
+                            <% selectee["docs"].each do |doc| %>
+                                <%= doc["title"] %>
+                                <p class="pl-2 mt-2">
+                                    <%= doc["highlights"].html_safe %>
+                                </p>
+                            <% end %>
+                        </ul>
                     </div> <!-- end of modal body -->
                 </div> <!-- end of modal content -->
             </div> <!-- end of dialog -->
