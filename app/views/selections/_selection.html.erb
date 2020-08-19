@@ -1,5 +1,5 @@
-<div>
-    <div class="sub-heading">
+<div class="pb-4">
+    <div class="sub-heading mb-3">
         Results of Comparison for "<%= selection.word %>"
     </div>
     
@@ -8,9 +8,11 @@
             <div class="selectee d-flex flex-column align-items-stretch">
                 <div class="overflow-hidden flex-1"><%= selectee["name"] %></div>
                 <div class="mb-1 flex-1">Average frequency: <%= selectee["average"] %></div>
-                <div id="chart_<%= selectee["folder_id"] %>" class="chart"></div>
+                <% if selectee["average"] > 0.0 %>
+                    <div id="chart_<%= selectee["folder_id"] %>" class="chart"></div>
+                <% end %>
                 <div class="d-flex flex-row justify-content-end mt-1">
-                    <a class="link" data-toggle="modal" data-target="#modal_<%= selectee["folder_id"] %>">
+                    <a class="highlights-btn" data-toggle="modal" data-target="#modal_<%= selectee["folder_id"] %>">
                         View Highlights
                     </a>
                 </div>
@@ -33,7 +35,9 @@
                         ['<%= doc["title"] %>', <%= doc["tally"] %>]
                     ]);
                     var options = {
-                     'title': '<%= selectee["name"] %>'
+                        'title': '<%= selectee["name"] %>', 
+                        colors: ['#0277bc'],
+                        legend: {position: 'in'}
                     };
                 
                     var chart = new google.visualization.ColumnChart(document.getElementById('chart_<%= selectee["folder_id"] %>'));
