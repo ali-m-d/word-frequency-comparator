@@ -1,16 +1,18 @@
 <div class="alert">
   <div class="container">
     <div class="d-flex flex-row">
-    <div class="alert-text">
-      <% if flash.any? %>
-        <% flash.each do |type, msg| %>
-          <%= msg %>
+      <div class="alert-text">
+        <% if flash.any? %>
+          <% flash.each do |type, msg| %>
+            <%= msg %>
+          <% end %>
         <% end %>
+      </div>
+      <% if logged_in? %>
+        <div class="d-block d-md-none ml-auto">
+          <%= link_to "Logout", logout_path, method: :delete, class: "logout-btn" %> 
+        </div>
       <% end %>
-    </div>
-    <div class="d-block d-md-none ml-auto">
-      <%= link_to "Logout", logout_path, method: :delete, class: "logout-btn" %> 
-    </div>
     </div>
   </div>
 </div>
