@@ -20,6 +20,6 @@ test:
 production:
   <<: *default
   database: word_frequency_comparator_production
-  username: word-frequency-comparator
-  password: ka76wr
+  username: word_frequency_comparator
+  password: ENV['database_password']
 

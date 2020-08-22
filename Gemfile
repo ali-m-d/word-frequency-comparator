@@ -26,6 +26,8 @@ gem 'pg_search'
 gem 'pdf-reader'
 gem 'rack-cors'
 gem 'active_storage_validations'
+gem 'rails_same_site_cookie'
+gem 'figaro'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
