@@ -38,10 +38,10 @@ class DocumentsController < ApplicationController
                     escaped = URI.escape("http://boilerpipe-web.appspot.com/extract?url=#{params[:document][:url]}&output=text")
                     uri = URI.parse(escaped)
                     # for manual scraping:
-                        # html = Net::HTTP.get(uri)
-                        # text = Nokogiri::HTML(html).text
+                    html = Net::HTTP.get(uri)
+                    text = Nokogiri::HTML(html).text.gsub("\n"," ")
                     # scrape text through boilerpipe api  
-                    text = Net::HTTP.get(uri).gsub("\n"," ")
+                    # text = Net::HTTP.get(uri).gsub("\n"," ")
                     @document.text = text
                     @document.save
                 end
