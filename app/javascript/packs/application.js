@@ -16,7 +16,7 @@ window.$ = window.JQuery = JQuery;
 
 $(document).ready(function () {
     
-    let selectees = [];
+    window.selectees = [];
     
     $(document).click(function() {
         $('.alert-text').fadeOut();
@@ -26,7 +26,7 @@ $(document).ready(function () {
         $('#fileup').text(e.target.value.replace('C:\\fakepath\\', ""))
     });
     
-    $('.checkbox').change(function() {
+    $(document).on('change', '.checkbox', function() {
         var folderId = $(this).attr("id").replace(/^\D+/g, '')
         if ($(this).is(':checked') && !selectees.includes(folderId)) {
             selectees.push(folderId);

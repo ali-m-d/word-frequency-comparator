@@ -96,13 +96,16 @@
     &:hover {
         cursor: pointer;
         text-decoration: none;
-        background-color: $d-blue
+        background-color: $d-blue;
+        color: $white;
     }
     &:active {
         outline: none;
+        color: $white;
     }
     &:focus {
         outline: none;
+        color: $white;
     }
     &:visited {
         color: $white;
