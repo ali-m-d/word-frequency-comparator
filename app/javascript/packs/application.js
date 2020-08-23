@@ -13,9 +13,10 @@ import '@fortawesome/fontawesome-free/js/all';
 import '@fortawesome/fontawesome-free/css/all';
 
 window.$ = window.JQuery = JQuery;
-var selectees = [];
 
 $(document).ready(function () {
+    
+    let selectees = [];
     
     $(document).click(function() {
         $('.alert-text').fadeOut();
