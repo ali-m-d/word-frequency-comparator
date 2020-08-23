@@ -15,14 +15,17 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    
+    if @user.save
+      session[:user_id] = @user.id
+    end
 
     respond_to do |format|
       if @user.save
-        format.js
-        format.html { redirect_to new_session_url }
+        format.html { redirect_to folders_url }
         format.json { head :no_content }
       else
-        format.html { redirect_to new_session_url, notice: "Sorry, registration could not be completed" }
+        format.html { redirect_to new_session_url, notice: "#{@user.errors.full_messages.join(', ')}" }
       end
     end
   end
