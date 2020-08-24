@@ -101,10 +101,12 @@
     }
     &:active {
         outline: none;
+        background-color: $blue;
         color: $white;
     }
     &:focus {
         outline: none;
+        background-color: $blue;
         color: $white;
     }
     &:visited {
